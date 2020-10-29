@@ -240,6 +240,7 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+set_global_assignment -name VHDL_FILE flipFlopGenerico.vhd
 set_global_assignment -name VHDL_FILE unidadeControle.vhd
 set_global_assignment -name VHDL_FILE fluxoDados.vhd
 set_global_assignment -name VHDL_FILE mips_clock.vhd
