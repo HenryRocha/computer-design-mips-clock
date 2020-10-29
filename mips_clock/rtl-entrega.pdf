@@ -5,7 +5,7 @@
   /Author   (henryrocha)
   /Producer (Concept Engineering GmbH)
   /Creator  (Nlview 6.6.0  2016-02-25 bk=1.3518 VDI=39 GEI=35)
-  /CreationDate (D:20201029165420)
+  /CreationDate (D:20201029182020)
 >>
 endobj
 2 0 obj
@@ -44,7 +44,7 @@ endobj
 endobj
 %
 % Nlview page 1
-% (user space scaling 0.200651)
+% (user space scaling 0.199496)
 %
 9 0 obj
 <<
@@ -58,20 +58,20 @@ endobj
 endobj
 10 0 obj
 <<
-  /Length 23947
+  /Length 23959
 >>
 stream
-1 0 0 1 0 304.998 cm
+1 0 0 1 0 305.356 cm
 1 0 0 1 28.8 28.8 cm
-0.200651 0 0 -0.200651 0 0 cm
+0.199496 0 0 -0.199496 0 0 cm
 1 0 0 1 0 -620 cm
-0 0 2763 620 re
+0 0 2779 620 re
 W n
 /GS gs
 1 0 0 1 127 0 cm
 q
 1.000 1.000 1.000 rg
--127 0 2762 621 re
+-127 0 2778 621 re
 f
 Q
 q
@@ -262,7 +262,7 @@ BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
 0 2.07 Td
-(bancoReg_outA_debug[7..0]) Tj
+(bancoReg_outA_debug[31..0]) Tj
 ET
 Q
 2120 320 m
@@ -275,7 +275,7 @@ BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
 0 2.07 Td
-(bancoReg_outB_debug[7..0]) Tj
+(bancoReg_outB_debug[31..0]) Tj
 ET
 Q
 2120 420 m
@@ -288,7 +288,7 @@ BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
 0 2.07 Td
-(ULA_out_debug[7..0]) Tj
+(ULA_out_debug[31..0]) Tj
 ET
 Q
 1 w
@@ -513,16 +513,16 @@ S
 610 180 l
 S
 0.000 0.000 1.000 RG
-2430 20 m
-2430 13 l
-2444 13 l
-2451 20 l
-2444 27 l
-2430 27 l
+2440 20 m
+2440 13 l
+2454 13 l
+2461 20 l
+2454 27 l
+2440 27 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 20 cm
+1 0 0 1 2469 20 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -532,7 +532,7 @@ ET
 Q
 q
 0.024 0.278 0.435 rg
-1 0 0 1 2428 18 cm
+1 0 0 1 2438 18 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -540,16 +540,16 @@ BT
 (7'h0) Tj
 ET
 Q
-2430 50 m
-2430 43 l
-2444 43 l
-2451 50 l
-2444 57 l
-2430 57 l
+2440 50 m
+2440 43 l
+2454 43 l
+2461 50 l
+2454 57 l
+2440 57 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 50 cm
+1 0 0 1 2469 50 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -559,7 +559,7 @@ ET
 Q
 q
 0.024 0.278 0.435 rg
-1 0 0 1 2428 48 cm
+1 0 0 1 2438 48 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -567,16 +567,16 @@ BT
 (7'h0) Tj
 ET
 Q
-2430 80 m
-2430 73 l
-2444 73 l
-2451 80 l
-2444 87 l
-2430 87 l
+2440 80 m
+2440 73 l
+2454 73 l
+2461 80 l
+2454 87 l
+2440 87 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 80 cm
+1 0 0 1 2469 80 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -586,7 +586,7 @@ ET
 Q
 q
 0.024 0.278 0.435 rg
-1 0 0 1 2428 78 cm
+1 0 0 1 2438 78 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -594,16 +594,16 @@ BT
 (7'h0) Tj
 ET
 Q
-2430 190 m
-2430 183 l
-2444 183 l
-2451 190 l
-2444 197 l
-2430 197 l
+2440 190 m
+2440 183 l
+2454 183 l
+2461 190 l
+2454 197 l
+2440 197 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 190 cm
+1 0 0 1 2469 190 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -613,7 +613,7 @@ ET
 Q
 q
 0.024 0.278 0.435 rg
-1 0 0 1 2428 188 cm
+1 0 0 1 2438 188 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -621,16 +621,16 @@ BT
 (7'h0) Tj
 ET
 Q
-2430 350 m
-2430 343 l
-2444 343 l
-2451 350 l
-2444 357 l
-2430 357 l
+2440 350 m
+2440 343 l
+2454 343 l
+2461 350 l
+2454 357 l
+2440 357 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 350 cm
+1 0 0 1 2469 350 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -640,7 +640,7 @@ ET
 Q
 q
 0.024 0.278 0.435 rg
-1 0 0 1 2428 348 cm
+1 0 0 1 2438 348 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -648,16 +648,16 @@ BT
 (7'h0) Tj
 ET
 Q
-2430 380 m
-2430 373 l
-2444 373 l
-2451 380 l
-2444 387 l
-2430 387 l
+2440 380 m
+2440 373 l
+2454 373 l
+2461 380 l
+2454 387 l
+2440 387 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 380 cm
+1 0 0 1 2469 380 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -667,7 +667,7 @@ ET
 Q
 q
 0.024 0.278 0.435 rg
-1 0 0 1 2428 378 cm
+1 0 0 1 2438 378 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -820,16 +820,16 @@ S
 S
 3 w
 0.000 0.000 1.000 RG
-2430 120 m
-2430 113 l
-2444 113 l
-2451 120 l
-2444 127 l
-2430 127 l
+2440 120 m
+2440 113 l
+2454 113 l
+2461 120 l
+2454 127 l
+2440 127 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 120 cm
+1 0 0 1 2469 120 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -853,68 +853,68 @@ BT
 (SW[9..0]) Tj
 ET
 Q
-2430 220 m
-2430 213 l
-2444 213 l
-2451 220 l
-2444 227 l
-2430 227 l
+2440 220 m
+2440 213 l
+2454 213 l
+2461 220 l
+2454 227 l
+2440 227 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 220 cm
+1 0 0 1 2469 220 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
 0 -4.308 Td
-(ULA_out_debug[7..0]) Tj
+(ULA_out_debug[31..0]) Tj
 ET
 Q
-2430 240 m
-2430 233 l
-2444 233 l
-2451 240 l
-2444 247 l
-2430 247 l
+2440 240 m
+2440 233 l
+2454 233 l
+2461 240 l
+2454 247 l
+2440 247 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 240 cm
+1 0 0 1 2469 240 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
 0 -4.308 Td
-(bancoReg_outA_debug[7..0]) Tj
+(bancoReg_outA_debug[31..0]) Tj
 ET
 Q
-2430 260 m
-2430 253 l
-2444 253 l
-2451 260 l
-2444 267 l
-2430 267 l
+2440 260 m
+2440 253 l
+2454 253 l
+2461 260 l
+2454 267 l
+2440 267 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 260 cm
+1 0 0 1 2469 260 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
 0 -4.308 Td
-(bancoReg_outB_debug[7..0]) Tj
+(bancoReg_outB_debug[31..0]) Tj
 ET
 Q
 1 w
-2430 280 m
-2430 273 l
-2444 273 l
-2451 280 l
-2444 287 l
-2430 287 l
+2440 280 m
+2440 273 l
+2454 273 l
+2461 280 l
+2454 287 l
+2440 287 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 280 cm
+1 0 0 1 2469 280 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -1142,8 +1142,8 @@ q
 BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
--62.82 2.07 Td
-(entradaA[7..0]) Tj
+-68.38 2.07 Td
+(entradaA[31..0]) Tj
 ET
 Q
 1570 480 m
@@ -1155,8 +1155,8 @@ q
 BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
--62.82 2.07 Td
-(entradaB[7..0]) Tj
+-68.38 2.07 Td
+(entradaB[31..0]) Tj
 ET
 Q
 1570 500 m
@@ -1197,7 +1197,7 @@ BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
 0 2.07 Td
-(saida[7..0]) Tj
+(saida[31..0]) Tj
 ET
 Q
 1590 460 m
@@ -1327,8 +1327,8 @@ q
 BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
--82.26 2.07 Td
-(dadoEscritaC[7..0]) Tj
+-87.82 2.07 Td
+(dadoEscritaC[31..0]) Tj
 ET
 Q
 1980 300 m
@@ -1341,7 +1341,7 @@ BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
 0 2.07 Td
-(saidaA[7..0]) Tj
+(saidaA[31..0]) Tj
 ET
 Q
 1980 320 m
@@ -1354,7 +1354,7 @@ BT
 /F1 10 Tf
 1 0 0 -1 0 0 Tm
 0 2.07 Td
-(saidaB[7..0]) Tj
+(saidaB[31..0]) Tj
 ET
 Q
 1 w
@@ -1724,16 +1724,16 @@ S
 1110 280 l
 S
 0.000 0.000 1.000 RG
-2430 300 m
-2430 293 l
-2444 293 l
-2451 300 l
-2444 307 l
-2430 307 l
+2440 300 m
+2440 293 l
+2454 293 l
+2461 300 l
+2454 307 l
+2440 307 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 300 cm
+1 0 0 1 2469 300 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -1741,16 +1741,16 @@ BT
 (funct_debug[5..0]) Tj
 ET
 Q
-2430 320 m
-2430 313 l
-2444 313 l
-2451 320 l
-2444 327 l
-2430 327 l
+2440 320 m
+2440 313 l
+2454 313 l
+2461 320 l
+2454 327 l
+2440 327 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 320 cm
+1 0 0 1 2469 320 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -1758,16 +1758,16 @@ BT
 (opCode_debug[5..0]) Tj
 ET
 Q
-2430 160 m
-2430 153 l
-2444 153 l
-2451 160 l
-2444 167 l
-2430 167 l
+2440 160 m
+2440 153 l
+2454 153 l
+2461 160 l
+2454 167 l
+2440 167 l
 h S
 q
 0.000 0.000 0.000 rg
-1 0 0 1 2459 160 cm
+1 0 0 1 2469 160 cm
 BT
 /F1 12 Tf
 1 0 0 -1 0 0 Tm
@@ -1917,58 +1917,58 @@ ET
 Q
 3 w
 0.176 0.176 0.176 RG
-2332 140 m
-2348 140 l
+2342 140 m
+2358 140 l
 S
-2335 143 m
-2345 143 l
+2345 143 m
+2355 143 l
 S
-2338 146 m
-2342 146 l
+2348 146 m
+2352 146 l
 S
-2430 120 m
-2345 120 l
-S
-0.000 0.000 0.000 RG
-2345 120 m
-2340 125 l
-S
-0.176 0.176 0.176 RG
-2340 125 m
-2340 140 l
-S
-2340 37 m
-2340 115 l
+2440 120 m
+2355 120 l
 S
 0.000 0.000 0.000 RG
-2340 115 m
-2345 120 l
+2355 120 m
+2350 125 l
 S
 0.176 0.176 0.176 RG
-2345 120 m
-2430 120 l
+2350 125 m
+2350 140 l
+S
+2350 37 m
+2350 115 l
+S
+0.000 0.000 0.000 RG
+2350 115 m
+2355 120 l
+S
+0.176 0.176 0.176 RG
+2355 120 m
+2440 120 l
 S
 1 w
 980 40 m
-2340 40 l
+2350 40 l
 S
 980 90 m
-2340 90 l
+2350 90 l
 S
 3 w
 0.000 0.000 0.000 RG
 q
 0.000 0.000 0.000 rg
-2341 35 m
-2341 45 l
-2330 40 l
+2351 35 m
+2351 45 l
+2340 40 l
 f
 Q
 q
 0.000 0.000 0.000 rg
-2341 85 m
-2341 95 l
-2330 90 l
+2351 85 m
+2351 95 l
+2340 90 l
 f
 Q
 1 w
@@ -1997,33 +1997,33 @@ S
 40 110 l
 800 110 l
 800 120 l
-2320 120 l
+2330 120 l
 S
 0.000 0.000 0.000 RG
-2320 120 m
-2325 120 l
+2330 120 m
+2335 120 l
 S
 0.176 0.176 0.176 RG
-2325 120 m
-2430 120 l
+2335 120 m
+2440 120 l
 S
 0 40 m
 920 40 l
 S
 2120 420 m
-2360 420 l
-2360 220 l
-2430 220 l
+2370 420 l
+2370 220 l
+2440 220 l
 S
 2120 300 m
-2280 300 l
-2280 240 l
-2430 240 l
+2290 300 l
+2290 240 l
+2440 240 l
 S
 2120 320 m
-2300 320 l
-2300 260 l
-2430 260 l
+2310 320 l
+2310 260 l
+2440 260 l
 S
 1 w
 160 210 m
@@ -2031,16 +2031,16 @@ S
 60 340 l
 780 340 l
 780 570 l
-2380 570 l
-2380 280 l
-2430 280 l
+2390 570 l
+2390 280 l
+2440 280 l
 S
 2120 500 m
-2380 500 l
+2390 500 l
 S
 q
 0.176 0.176 0.176 rg
-2378 498 5 5 re
+2388 498 5 5 re
 f
 Q
 3 w
@@ -2246,6 +2246,9 @@ q
 2057 317 7 7 re
 f
 Q
+1120 280 m
+1280 280 l
+S
 1650 480 m
 1770 480 l
 1770 280 l
@@ -2259,24 +2262,21 @@ q
 1767 417 7 7 re
 f
 Q
-1120 280 m
-1280 280 l
-S
 160 240 m
 80 240 l
 80 360 l
 760 360 l
 760 590 l
-2340 590 l
-2340 200 l
+2350 590 l
+2350 200 l
 2120 200 l
 S
-2340 300 m
-2430 300 l
+2350 300 m
+2440 300 l
 S
 q
 0.176 0.176 0.176 rg
-2337 297 7 7 re
+2347 297 7 7 re
 f
 Q
 160 170 m
@@ -2284,24 +2284,24 @@ Q
 40 380 l
 740 380 l
 740 610 l
-2320 610 l
-2320 220 l
+2330 610 l
+2330 220 l
 2120 220 l
 S
-2320 320 m
-2430 320 l
+2330 320 m
+2440 320 l
 S
 q
 0.176 0.176 0.176 rg
-2317 317 7 7 re
+2327 317 7 7 re
 f
 Q
 920 380 m
 800 380 l
 800 150 l
-2320 150 l
-2320 160 l
-2430 160 l
+2330 150 l
+2330 160 l
+2440 160 l
 S
 620 180 m
 800 180 l
@@ -2448,18 +2448,18 @@ endobj
 endobj
 13 0 obj
 <<
-  /Title  (LEDR[1]~not_408 LEDR[1]~not_408)
+  /Title  (LEDR[1]~not_888 LEDR[1]~not_888)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 238 446 255 455]
+  /Dest   [9 0 R /FitR 237 445 253 455]
   /Parent 12 0 R
   /Next   14 0 R
 >>
 endobj
 14 0 obj
 <<
-  /Title  (LEDR[2]~not_410 LEDR[2]~not_410)
+  /Title  (LEDR[2]~not_890 LEDR[2]~not_890)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 238 436 255 445]
+  /Dest   [9 0 R /FitR 237 436 253 445]
   /Parent 12 0 R
   /Prev   13 0 R
   /Next   15 0 R
@@ -2469,7 +2469,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2 fluxoDados:fluxoDados_2)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 222 344 504 425]
+  /Dest   [9 0 R /FitR 220 344 502 424]
   /Parent 12 0 R
   /Prev   14 0 R
   /Next   16 0 R
@@ -2479,7 +2479,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2|ROMMIPS:ROM_5 ROMMIPS:ROM_5)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 357 394 394 411]
+  /Dest   [9 0 R /FitR 355 395 392 411]
   /Parent 12 0 R
   /Prev   15 0 R
   /Next   17 0 R
@@ -2489,7 +2489,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2|ULA:ULA_7 ULA:ULA_7)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 358 354 393 375]
+  /Dest   [9 0 R /FitR 355 355 392 375]
   /Parent 12 0 R
   /Prev   16 0 R
   /Next   18 0 R
@@ -2499,7 +2499,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2|bancoRegistradores:bancoRegs_6 bancoRegistradores:bancoRegs_6)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 420 382 461 415]
+  /Dest   [9 0 R /FitR 417 383 459 415]
   /Parent 12 0 R
   /Prev   17 0 R
   /Next   19 0 R
@@ -2509,7 +2509,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2|flipFlopGenerico:flipFlopFlagZero_8 flipFlopGenerico:flipFlopFlagZero_8)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 424 346 461 371]
+  /Dest   [9 0 R /FitR 421 347 458 371]
   /Parent 12 0 R
   /Prev   18 0 R
   /Next   20 0 R
@@ -2519,7 +2519,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2|registradorGenerico:PC_3 registradorGenerico:PC_3)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 299 390 336 415]
+  /Dest   [9 0 R /FitR 298 391 334 415]
   /Parent 12 0 R
   /Prev   19 0 R
   /Next   21 0 R
@@ -2529,7 +2529,7 @@ endobj
 <<
   /Title  (fluxoDados:fluxoDados_2|somaConstante:somaUm_4 somaConstante:somaUm_4)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 253 399 287 411]
+  /Dest   [9 0 R /FitR 252 398 285 411]
   /Parent 12 0 R
   /Prev   20 0 R
   /Next   22 0 R
@@ -2539,7 +2539,7 @@ endobj
 <<
   /Title  (unidadeControle:UC_9 unidadeControle:UC_9)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 76 402 196 434]
+  /Dest   [9 0 R /FitR 76 402 195 434]
   /Parent 12 0 R
   /Prev   21 0 R
   /Next   23 0 R
@@ -2549,7 +2549,7 @@ endobj
 <<
   /Title  (unidadeControle:UC_9|Equal0_10 Equal0_10)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 97 417 121 429]
+  /Dest   [9 0 R /FitR 96 416 121 428]
   /Parent 12 0 R
   /Prev   22 0 R
   /Next   24 0 R
@@ -2578,16 +2578,16 @@ endobj
 endobj
 26 0 obj
 <<
-  /Title  (CLOCK_50390 input)
+  /Title  (CLOCK_50870 input)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 37 420 54 423]
+  /Dest   [9 0 R /FitR 36 420 54 423]
   /Parent 25 0 R
   /Next   27 0 R
 >>
 endobj
 27 0 obj
 <<
-  /Title  (FPGA_RESET_N405 input)
+  /Title  (FPGA_RESET_N885 input)
   /C      [0.0 0.0 0.4]
   /Dest   [9 0 R /FitR 30 438 54 441]
   /Parent 25 0 R
@@ -2597,9 +2597,9 @@ endobj
 endobj
 28 0 obj
 <<
-  /Title  (flagZero_debug479 output)
+  /Title  (flagZero_debug959 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 400 564 403]
+  /Dest   [9 0 R /FitR 540 400 563 403]
   /Parent 25 0 R
   /Prev   27 0 R
 >>
@@ -2619,18 +2619,18 @@ endobj
 endobj
 30 0 obj
 <<
-  /Title  (HEX0[6..0]507 output)
+  /Title  (HEX0[6..0]1059 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 537 452 559 457]
+  /Dest   [9 0 R /FitR 536 451 558 456]
   /Parent 29 0 R
   /Next   31 0 R
 >>
 endobj
 31 0 obj
 <<
-  /Title  (HEX1[6..0]508 output)
+  /Title  (HEX1[6..0]1060 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 537 446 559 451]
+  /Dest   [9 0 R /FitR 536 445 558 450]
   /Parent 29 0 R
   /Prev   30 0 R
   /Next   32 0 R
@@ -2638,9 +2638,9 @@ endobj
 endobj
 32 0 obj
 <<
-  /Title  (HEX2[6..0]509 output)
+  /Title  (HEX2[6..0]1061 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 537 440 559 445]
+  /Dest   [9 0 R /FitR 536 439 558 444]
   /Parent 29 0 R
   /Prev   31 0 R
   /Next   33 0 R
@@ -2648,9 +2648,9 @@ endobj
 endobj
 33 0 obj
 <<
-  /Title  (HEX3[6..0]510 output)
+  /Title  (HEX3[6..0]1062 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 537 418 559 423]
+  /Dest   [9 0 R /FitR 536 417 558 422]
   /Parent 29 0 R
   /Prev   32 0 R
   /Next   34 0 R
@@ -2658,9 +2658,9 @@ endobj
 endobj
 34 0 obj
 <<
-  /Title  (HEX4[6..0]511 output)
+  /Title  (HEX4[6..0]1063 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 537 385 559 390]
+  /Dest   [9 0 R /FitR 536 386 558 391]
   /Parent 29 0 R
   /Prev   33 0 R
   /Next   35 0 R
@@ -2668,9 +2668,9 @@ endobj
 endobj
 35 0 obj
 <<
-  /Title  (HEX5[6..0]512 output)
+  /Title  (HEX5[6..0]1064 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 537 379 559 384]
+  /Dest   [9 0 R /FitR 536 380 558 385]
   /Parent 29 0 R
   /Prev   34 0 R
   /Next   36 0 R
@@ -2678,9 +2678,9 @@ endobj
 endobj
 36 0 obj
 <<
-  /Title  (KEY[3..0]505 input)
+  /Title  (KEY[3..0]1057 input)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 39 448 54 452]
+  /Dest   [9 0 R /FitR 39 447 54 451]
   /Parent 29 0 R
   /Prev   35 0 R
   /Next   37 0 R
@@ -2688,9 +2688,9 @@ endobj
 endobj
 37 0 obj
 <<
-  /Title  (LEDR[9..0]506 output)
+  /Title  (LEDR[9..0]1058 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 432 559 436]
+  /Dest   [9 0 R /FitR 540 431 558 435]
   /Parent 29 0 R
   /Prev   36 0 R
   /Next   38 0 R
@@ -2698,9 +2698,9 @@ endobj
 endobj
 38 0 obj
 <<
-  /Title  (SW[9..0]504 input)
+  /Title  (SW[9..0]1056 input)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 40 432 54 436]
+  /Dest   [9 0 R /FitR 39 431 54 435]
   /Parent 29 0 R
   /Prev   37 0 R
   /Next   39 0 R
@@ -2708,9 +2708,9 @@ endobj
 endobj
 39 0 obj
 <<
-  /Title  (ULA_out_debug[7..0]518 output)
+  /Title  (ULA_out_debug[31..0]1070 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 412 570 416]
+  /Dest   [9 0 R /FitR 540 411 570 415]
   /Parent 29 0 R
   /Prev   38 0 R
   /Next   40 0 R
@@ -2718,9 +2718,9 @@ endobj
 endobj
 40 0 obj
 <<
-  /Title  (bancoReg_outA_debug[7..0]516 output)
+  /Title  (bancoReg_outA_debug[31..0]1068 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 408 578 412]
+  /Dest   [9 0 R /FitR 540 407 578 411]
   /Parent 29 0 R
   /Prev   39 0 R
   /Next   41 0 R
@@ -2728,9 +2728,9 @@ endobj
 endobj
 41 0 obj
 <<
-  /Title  (bancoReg_outB_debug[7..0]517 output)
+  /Title  (bancoReg_outB_debug[31..0]1069 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 404 578 408]
+  /Dest   [9 0 R /FitR 540 403 578 407]
   /Parent 29 0 R
   /Prev   40 0 R
   /Next   42 0 R
@@ -2738,9 +2738,9 @@ endobj
 endobj
 42 0 obj
 <<
-  /Title  (funct_debug[5..0]515 output)
+  /Title  (funct_debug[5..0]1067 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 396 566 400]
+  /Dest   [9 0 R /FitR 540 396 565 399]
   /Parent 29 0 R
   /Prev   41 0 R
   /Next   43 0 R
@@ -2748,9 +2748,9 @@ endobj
 endobj
 43 0 obj
 <<
-  /Title  (opCode_debug[5..0]514 output)
+  /Title  (opCode_debug[5..0]1066 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 391 569 396]
+  /Dest   [9 0 R /FitR 540 392 568 396]
   /Parent 29 0 R
   /Prev   42 0 R
   /Next   44 0 R
@@ -2758,9 +2758,9 @@ endobj
 endobj
 44 0 obj
 <<
-  /Title  (palavraControle_debug[6..0]513 output)
+  /Title  (palavraControle_debug[6..0]1065 output)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 541 424 577 428]
+  /Dest   [9 0 R /FitR 540 423 576 427]
   /Parent 29 0 R
   /Prev   43 0 R
 >>
@@ -2780,18 +2780,18 @@ endobj
 endobj
 46 0 obj
 <<
-  /Title  (OUT0_592)
+  /Title  (OUT0_1216)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 54 401 239 422]
+  /Dest   [9 0 R /FitR 53 401 237 422]
   /Parent 45 0 R
   /Next   47 0 R
 >>
 endobj
 47 0 obj
 <<
-  /Title  (OUT0_597)
+  /Title  (OUT0_1221)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 54 440 238 440]
+  /Dest   [9 0 R /FitR 54 439 237 439]
   /Parent 45 0 R
   /Prev   46 0 R
   /Next   48 0 R
@@ -2799,9 +2799,9 @@ endobj
 endobj
 48 0 obj
 <<
-  /Title  (flagZero_59)
+  /Title  (flagZero_131)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 66 343 542 416]
+  /Dest   [9 0 R /FitR 65 343 541 416]
   /Parent 45 0 R
   /Prev   47 0 R
   /Next   49 0 R
@@ -2809,9 +2809,9 @@ endobj
 endobj
 49 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|DOUT_584)
+  /Title  (fluxoDados:fluxoDados_2|DOUT_1208)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 451 357 475 357]
+  /Dest   [9 0 R /FitR 449 358 473 358]
   /Parent 45 0 R
   /Prev   48 0 R
   /Next   50 0 R
@@ -2819,9 +2819,9 @@ endobj
 endobj
 50 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|OUT0_564)
+  /Title  (fluxoDados:fluxoDados_2|OUT0_1188)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 242 361 435 414]
+  /Dest   [9 0 R /FitR 241 361 433 414]
   /Parent 45 0 R
   /Prev   49 0 R
   /Next   51 0 R
@@ -2829,9 +2829,9 @@ endobj
 endobj
 51 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|flagZero_58)
+  /Title  (fluxoDados:fluxoDados_2|flagZero_130)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 385 357 435 366]
+  /Dest   [9 0 R /FitR 383 357 433 366]
   /Parent 45 0 R
   /Prev   50 0 R
   /Next   52 0 R
@@ -2839,9 +2839,9 @@ endobj
 endobj
 52 0 obj
 <<
-  /Title  (unidadeControle:UC_9|OUT_79)
+  /Title  (unidadeControle:UC_9|OUT_151)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 118 418 174 422]
+  /Dest   [9 0 R /FitR 117 417 173 422]
   /Parent 45 0 R
   /Prev   51 0 R
 >>
@@ -2861,9 +2861,9 @@ endobj
 endobj
 54 0 obj
 <<
-  /Title  (@DATAIN_628,DATAIN_627)
+  /Title  (@DATAIN_1324,DATAIN_1323)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 523 430 541 434]
+  /Dest   [9 0 R /FitR 522 429 540 433]
   /Parent 53 0 R
   /Next   55 0 R
 >>
@@ -2872,7 +2872,7 @@ endobj
 <<
   /Title  (@LEDR)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 250 434 541 451]
+  /Dest   [9 0 R /FitR 249 433 540 451]
   /Parent 53 0 R
   /Prev   54 0 R
   /Next   56 0 R
@@ -2880,9 +2880,9 @@ endobj
 endobj
 56 0 obj
 <<
-  /Title  (OUT0_671)
+  /Title  (OUT0_1367)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 53 433 541 436]
+  /Dest   [9 0 R /FitR 53 433 540 436]
   /Parent 53 0 R
   /Prev   55 0 R
   /Next   57 0 R
@@ -2890,9 +2890,9 @@ endobj
 endobj
 57 0 obj
 <<
-  /Title  (OUT0_672)
+  /Title  (OUT0_1368)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 54 450 238 450]
+  /Dest   [9 0 R /FitR 54 449 237 449]
   /Parent 53 0 R
   /Prev   56 0 R
   /Next   58 0 R
@@ -2900,9 +2900,9 @@ endobj
 endobj
 58 0 obj
 <<
-  /Title  (ULA_out_debug[7..0]_677)
+  /Title  (ULA_out_debug[31..0]_1373)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 479 373 542 414]
+  /Dest   [9 0 R /FitR 476 373 541 414]
   /Parent 53 0 R
   /Prev   57 0 R
   /Next   59 0 R
@@ -2910,9 +2910,9 @@ endobj
 endobj
 59 0 obj
 <<
-  /Title  (bancoReg_outA_debug[7..0]_675)
+  /Title  (bancoReg_outA_debug[31..0]_1371)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 479 397 542 410]
+  /Dest   [9 0 R /FitR 476 397 541 410]
   /Parent 53 0 R
   /Prev   58 0 R
   /Next   60 0 R
@@ -2920,9 +2920,9 @@ endobj
 endobj
 60 0 obj
 <<
-  /Title  (bancoReg_outB_debug[7..0]_676)
+  /Title  (bancoReg_outB_debug[31..0]_1372)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 479 393 542 406]
+  /Dest   [9 0 R /FitR 476 393 541 406]
   /Parent 53 0 R
   /Prev   59 0 R
   /Next   61 0 R
@@ -2930,9 +2930,9 @@ endobj
 endobj
 61 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|DOUT[8..0]_586)
+  /Title  (fluxoDados:fluxoDados_2|DOUT[8..0]_1210)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 246 401 369 418]
+  /Dest   [9 0 R /FitR 245 401 367 418]
   /Parent 53 0 R
   /Prev   60 0 R
   /Next   62 0 R
@@ -2940,9 +2940,9 @@ endobj
 endobj
 62 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|Dado[31..0]_588)
+  /Title  (fluxoDados:fluxoDados_2|Dado[31..0]_1212)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 385 388 475 419]
+  /Dest   [9 0 R /FitR 383 388 473 419]
   /Parent 53 0 R
   /Prev   61 0 R
   /Next   63 0 R
@@ -2950,9 +2950,9 @@ endobj
 endobj
 63 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|OUT0_585)
+  /Title  (fluxoDados:fluxoDados_2|OUT0_1209)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 242 356 435 387]
+  /Dest   [9 0 R /FitR 241 356 433 387]
   /Parent 53 0 R
   /Prev   62 0 R
   /Next   64 0 R
@@ -2960,9 +2960,9 @@ endobj
 endobj
 64 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|saidaA[7..0]_589)
+  /Title  (fluxoDados:fluxoDados_2|saidaA[31..0]_1213)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 346 365 475 398]
+  /Dest   [9 0 R /FitR 344 365 473 398]
   /Parent 53 0 R
   /Prev   63 0 R
   /Next   65 0 R
@@ -2970,9 +2970,9 @@ endobj
 endobj
 65 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|saidaB[7..0]_590)
+  /Title  (fluxoDados:fluxoDados_2|saidaB[31..0]_1214)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 350 361 475 394]
+  /Dest   [9 0 R /FitR 348 361 473 394]
   /Parent 53 0 R
   /Prev   64 0 R
   /Next   66 0 R
@@ -2980,9 +2980,9 @@ endobj
 endobj
 66 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|saida[7..0]_591)
+  /Title  (fluxoDados:fluxoDados_2|saida[31..0]_1215)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 384 361 475 402]
+  /Dest   [9 0 R /FitR 382 361 473 402]
   /Parent 53 0 R
   /Prev   65 0 R
   /Next   67 0 R
@@ -2990,9 +2990,9 @@ endobj
 endobj
 67 0 obj
 <<
-  /Title  (fluxoDados:fluxoDados_2|saida[8..0]_587)
+  /Title  (fluxoDados:fluxoDados_2|saida[8..0]_1211)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 279 402 311 402]
+  /Dest   [9 0 R /FitR 277 401 309 401]
   /Parent 53 0 R
   /Prev   66 0 R
   /Next   68 0 R
@@ -3000,9 +3000,9 @@ endobj
 endobj
 68 0 obj
 <<
-  /Title  (funct[5..0]_674)
+  /Title  (funct[5..0]_1370)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 69 339 541 418]
+  /Dest   [9 0 R /FitR 69 339 540 418]
   /Parent 53 0 R
   /Prev   67 0 R
   /Next   69 0 R
@@ -3010,9 +3010,9 @@ endobj
 endobj
 69 0 obj
 <<
-  /Title  (opCode[5..0]_673)
+  /Title  (opCode[5..0]_1369)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 61 335 541 424]
+  /Dest   [9 0 R /FitR 61 335 540 424]
   /Parent 53 0 R
   /Prev   68 0 R
   /Next   70 0 R
@@ -3020,9 +3020,9 @@ endobj
 endobj
 70 0 obj
 <<
-  /Title  (palavraControle[6..0]_678)
+  /Title  (palavraControle[6..0]_1374)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 178 381 542 428]
+  /Dest   [9 0 R /FitR 177 381 541 428]
   /Parent 53 0 R
   /Prev   69 0 R
   /Next   71 0 R
@@ -3030,9 +3030,9 @@ endobj
 endobj
 71 0 obj
 <<
-  /Title  (unidadeControle:UC_9|OUT0_110)
+  /Title  (unidadeControle:UC_9|OUT0_182)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 90 424 106 424]
+  /Dest   [9 0 R /FitR 90 423 106 423]
   /Parent 53 0 R
   /Prev   70 0 R
   /Next   72 0 R
@@ -3040,9 +3040,9 @@ endobj
 endobj
 72 0 obj
 <<
-  /Title  (unidadeControle:UC_9|OUT0_111)
+  /Title  (unidadeControle:UC_9|OUT0_183)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 90 410 132 410]
+  /Dest   [9 0 R /FitR 90 409 131 409]
   /Parent 53 0 R
   /Prev   71 0 R
   /Next   73 0 R
@@ -3050,9 +3050,9 @@ endobj
 endobj
 73 0 obj
 <<
-  /Title  (unidadeControle:UC_9|OUT0_112)
+  /Title  (unidadeControle:UC_9|OUT0_184)
   /C      [0.0 0.0 0.4]
-  /Dest   [9 0 R /FitR 143 411 174 422]
+  /Dest   [9 0 R /FitR 143 411 173 421]
   /Parent 53 0 R
   /Prev   72 0 R
 >>
@@ -3097,77 +3097,77 @@ xref
 0000000000 65535 f 
 0000000009 00000 n 
 0000000219 00000 n 
-0000024910 00000 n 
+0000024922 00000 n 
 0000000369 00000 n 
 0000000496 00000 n 
 0000000644 00000 n 
-0000036180 00000 n 
-0000036159 00000 n 
+0000036240 00000 n 
+0000036219 00000 n 
 0000000768 00000 n 
 0000000908 00000 n 
-0000036002 00000 n 
-0000027444 00000 n 
-0000025010 00000 n 
-0000025174 00000 n 
-0000025355 00000 n 
-0000025552 00000 n 
-0000025753 00000 n 
-0000025946 00000 n 
-0000026181 00000 n 
-0000026426 00000 n 
-0000026649 00000 n 
-0000026868 00000 n 
-0000027058 00000 n 
-0000027247 00000 n 
-0000028079 00000 n 
-0000027605 00000 n 
-0000027753 00000 n 
-0000027922 00000 n 
-0000030830 00000 n 
-0000028252 00000 n 
-0000028405 00000 n 
-0000028575 00000 n 
-0000028745 00000 n 
-0000028915 00000 n 
-0000029085 00000 n 
-0000029255 00000 n 
-0000029421 00000 n 
-0000029591 00000 n 
-0000029756 00000 n 
-0000029935 00000 n 
-0000030120 00000 n 
-0000030305 00000 n 
-0000030482 00000 n 
-0000030660 00000 n 
-0000032174 00000 n 
-0000031008 00000 n 
-0000031148 00000 n 
-0000031305 00000 n 
-0000031465 00000 n 
-0000031647 00000 n 
-0000031829 00000 n 
-0000032014 00000 n 
-0000035840 00000 n 
-0000032346 00000 n 
-0000032501 00000 n 
-0000032656 00000 n 
-0000032813 00000 n 
-0000032970 00000 n 
-0000033143 00000 n 
-0000033322 00000 n 
-0000033501 00000 n 
-0000033689 00000 n 
-0000033878 00000 n 
-0000034060 00000 n 
-0000034250 00000 n 
-0000034440 00000 n 
-0000034629 00000 n 
-0000034818 00000 n 
-0000034982 00000 n 
-0000035147 00000 n 
-0000035322 00000 n 
-0000035500 00000 n 
-0000035678 00000 n 
+0000036062 00000 n 
+0000027456 00000 n 
+0000025022 00000 n 
+0000025186 00000 n 
+0000025367 00000 n 
+0000025564 00000 n 
+0000025765 00000 n 
+0000025958 00000 n 
+0000026193 00000 n 
+0000026438 00000 n 
+0000026661 00000 n 
+0000026880 00000 n 
+0000027070 00000 n 
+0000027259 00000 n 
+0000028091 00000 n 
+0000027617 00000 n 
+0000027765 00000 n 
+0000027934 00000 n 
+0000030860 00000 n 
+0000028264 00000 n 
+0000028418 00000 n 
+0000028589 00000 n 
+0000028760 00000 n 
+0000028931 00000 n 
+0000029102 00000 n 
+0000029273 00000 n 
+0000029440 00000 n 
+0000029611 00000 n 
+0000029777 00000 n 
+0000029958 00000 n 
+0000030145 00000 n 
+0000030332 00000 n 
+0000030510 00000 n 
+0000030689 00000 n 
+0000032211 00000 n 
+0000031038 00000 n 
+0000031179 00000 n 
+0000031337 00000 n 
+0000031498 00000 n 
+0000031681 00000 n 
+0000031864 00000 n 
+0000032050 00000 n 
+0000035900 00000 n 
+0000032383 00000 n 
+0000032540 00000 n 
+0000032695 00000 n 
+0000032853 00000 n 
+0000033011 00000 n 
+0000033186 00000 n 
+0000033367 00000 n 
+0000033548 00000 n 
+0000033737 00000 n 
+0000033927 00000 n 
+0000034110 00000 n 
+0000034302 00000 n 
+0000034494 00000 n 
+0000034685 00000 n 
+0000034875 00000 n 
+0000035040 00000 n 
+0000035206 00000 n 
+0000035382 00000 n 
+0000035560 00000 n 
+0000035738 00000 n 
 trailer
 <<
   /Size 74
@@ -3175,5 +3175,5 @@ trailer
   /Root 2 0 R
 >>
 startxref
-36262
+36322
 %%EOF
