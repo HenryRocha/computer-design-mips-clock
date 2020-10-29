@@ -24,7 +24,11 @@ ENTITY fluxoDados IS
         -- Output ports
         opCode   : OUT STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0);
         funct    : OUT STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
-        flagZero : OUT STD_LOGIC
+        flagZero : OUT STD_LOGIC;
+        -- Saidas para simulacao
+        bancoReg_outA_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        bancoReg_outB_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        ULA_out_debug       : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -48,7 +52,7 @@ ARCHITECTURE main OF fluxoDados IS
 
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
-    ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
+    ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(SELETOR_ULA DOWNTO 1);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -105,7 +109,8 @@ BEGIN
 
     ULA : ENTITY work.ULA
         GENERIC MAP(
-            larguraDados => DATA_WIDTH
+            larguraDados => DATA_WIDTH,
+            SEL_WIDTH    => SELETOR_ULA
         )
         PORT MAP(
             entradaA => bancoReg_outA,
@@ -118,4 +123,9 @@ BEGIN
     opCode   <= instOpCode;
     flagZero <= ULA_flagZero_out;
     funct    <= instFunct;
+
+    -- Saidas de simulacao
+    bancoReg_outA_debug <= bancoReg_outA;
+    bancoReg_outB_debug <= bancoReg_outB;
+    ULA_out_debug       <= ULA_out;
 END ARCHITECTURE;
