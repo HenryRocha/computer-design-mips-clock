@@ -14,6 +14,7 @@ ENTITY fluxoDados IS
         FUNCT_WIDTH            : NATURAL := 6;
         PALAVRA_CONTROLE_WIDTH : NATURAL := 6;
         SHAMT_WIDTH            : NATURAL := 6;
+        SELETOR_ULA            : NATURAL := 3;
         ADDR_WIDTH             : NATURAL := 32
     );
     PORT (
@@ -22,6 +23,7 @@ ENTITY fluxoDados IS
         palavraControle : IN STD_LOGIC_VECTOR(PALAVRA_CONTROLE_WIDTH - 1 DOWNTO 0);
         -- Output ports
         opCode   : OUT STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0);
+        funct    : OUT STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
         flagZero : OUT STD_LOGIC
     );
 END ENTITY;
@@ -42,13 +44,14 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS rt         : STD_LOGIC_VECTOR(REG_END_WIDTH - 1 DOWNTO 0) IS instrucao(20 DOWNTO 16);
     ALIAS rd         : STD_LOGIC_VECTOR(REG_END_WIDTH - 1 DOWNTO 0) IS instrucao(15 DOWNTO 11);
     ALIAS shamt      : STD_LOGIC_VECTOR(SHAMT_WIDTH - 1 DOWNTO 0) IS instrucao(10 DOWNTO 6);
-    ALIAS funct      : STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0) IS instrucao(5 DOWNTO 0);
+    ALIAS instFunct  : STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0) IS instrucao(5 DOWNTO 0);
 
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
+    ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
 
     -- Constantes
-    CONSTANT INCREMENTO : NATURAL := 1;
+    CONSTANT INCREMENTO : NATURAL := 4;
 BEGIN
     PC : ENTITY work.registradorGenerico
         GENERIC MAP(
@@ -76,7 +79,7 @@ BEGIN
         GENERIC MAP(
             dataWidth       => INST_WIDTH,
             addrWidth       => ADDR_WIDTH,
-            memoryAddrWidth => 512
+            memoryAddrWidth => 6
         )
         PORT MAP(
             clk      => clk,
@@ -107,11 +110,12 @@ BEGIN
         PORT MAP(
             entradaA => bancoReg_outA,
             entradaB => bancoReg_outB,
-            seletor  => funct,
+            seletor  => operacaoULA,
             saida    => ULA_out,
             flagZero => ULA_flagZero_out
         );
 
     opCode   <= instOpCode;
     flagZero <= ULA_flagZero_out;
+    funct    <= instFunct;
 END ARCHITECTURE;

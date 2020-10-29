@@ -13,8 +13,9 @@ ENTITY mips_clock IS
         OPCODE_WIDTH           : NATURAL := 6;
         REG_END_WIDTH          : NATURAL := 5;
         FUNCT_WIDTH            : NATURAL := 6;
-        PALAVRA_CONTROLE_WIDTH : NATURAL := 1;
+        PALAVRA_CONTROLE_WIDTH : NATURAL := 4;
         SHAMT_WIDTH            : NATURAL := 5;
+        SELETOR_ULA            : NATURAL := 3;
         ADDR_WIDTH             : NATURAL := 9
     );
     PORT (
@@ -34,6 +35,7 @@ ARCHITECTURE main OF mips_clock IS
     -- Sinais intermediarios
     SIGNAL palavraControle : STD_LOGIC_VECTOR(PALAVRA_CONTROLE_WIDTH - 1 DOWNTO 0);
     SIGNAL opCode          : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0);
+    SIGNAL funct           : STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
     SIGNAL flagZero        : STD_LOGIC;
 BEGIN
     fluxoDados : ENTITY work.fluxoDados
@@ -45,13 +47,15 @@ BEGIN
             FUNCT_WIDTH            => FUNCT_WIDTH,
             PALAVRA_CONTROLE_WIDTH => PALAVRA_CONTROLE_WIDTH,
             SHAMT_WIDTH            => SHAMT_WIDTH,
+            SELETOR_ULA            => SELETOR_ULA,
             ADDR_WIDTH             => ADDR_WIDTH
         )
         PORT MAP(
             clk             => CLOCK_50,
             palavraControle => palavraControle,
             opCode          => opCode,
-            flagZero        => flagZero
+            flagZero        => flagZero,
+            funct           => funct
         );
 
     -- Saidas de teste
