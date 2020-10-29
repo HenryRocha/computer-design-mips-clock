@@ -1,4 +1,3 @@
-
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
@@ -23,7 +22,7 @@ BEGIN
         -- The asynchronous reset signal has the highest priority
         IF (RST = '1') THEN
             DOUT <= (OTHERS => '0'); -- Código reconfigurável.
-            ELSE
+        ELSE
             -- At a clock edge, if asynchronous signals have not taken priority,
             -- respond to the appropriate synchronous signal.
             -- Check for synchronous reset, then synchronous load.
