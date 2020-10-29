@@ -30,7 +30,6 @@ timing
 *.html
 *.jdi
 *.jpg
-*.mif
 *.pin
 *.pof
 *.ptf.*
@@ -49,4 +48,3 @@ timing
 PLLJ_PLLSPE_INFO.txt # The generated PLL specification file
 *.cdf
 *.qdf
-*.vwf
