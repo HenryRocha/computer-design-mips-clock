@@ -1,0 +1,4 @@
+[libraries]
+lib1.files = [
+  './mips_clock/*.vhd',
+]
