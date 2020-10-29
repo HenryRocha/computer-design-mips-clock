@@ -120,9 +120,17 @@ BEGIN
             flagZero => ULA_flagZero_out
         );
 
-    opCode   <= instOpCode;
-    flagZero <= ULA_flagZero_out;
-    funct    <= instFunct;
+    flipFlopFlagZero : ENTITY work.flipFlopGenerico
+        PORT MAP(
+            DIN    => ULA_flagZero_out,
+            DOUT   => flagZero,
+            ENABLE => '1',
+            CLK    => clk,
+            RST    => '0'
+        );
+
+    opCode <= instOpCode;
+    funct  <= instFunct;
 
     -- Saidas de simulacao
     bancoReg_outA_debug <= bancoReg_outA;
