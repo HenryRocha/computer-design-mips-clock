@@ -8,7 +8,7 @@ USE ieee.std_logic_1164.ALL;
 
 ENTITY mips_clock IS
     GENERIC (
-        DATA_WIDTH             : NATURAL := 8;
+        DATA_WIDTH             : NATURAL := 32;
         INST_WIDTH             : NATURAL := 32;
         OPCODE_WIDTH           : NATURAL := 6;
         REG_END_WIDTH          : NATURAL := 5;
