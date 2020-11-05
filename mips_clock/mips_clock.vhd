@@ -13,10 +13,10 @@ ENTITY mips_clock IS
         OPCODE_WIDTH           : NATURAL := 6;
         REG_END_WIDTH          : NATURAL := 5;
         FUNCT_WIDTH            : NATURAL := 6;
-        PALAVRA_CONTROLE_WIDTH : NATURAL := 7;
+        PALAVRA_CONTROLE_WIDTH : NATURAL := 13;
         SHAMT_WIDTH            : NATURAL := 5;
         SELETOR_ULA            : NATURAL := 6;
-        ADDR_WIDTH             : NATURAL := 9
+        ADDR_WIDTH             : NATURAL := 32
     );
     PORT (
         -- Input ports
@@ -36,7 +36,8 @@ ENTITY mips_clock IS
         flagZero_debug        : OUT STD_LOGIC;
         bancoReg_outA_debug   : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
         bancoReg_outB_debug   : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        ULA_out_debug         : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
+        ULA_out_debug         : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        PC_out_debug          : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -68,7 +69,8 @@ BEGIN
             -- Saida para simulacao
             bancoReg_outA_debug => bancoReg_outA_debug,
             bancoReg_outB_debug => bancoReg_outB_debug,
-            ULA_out_debug       => ULA_out_debug
+            ULA_out_debug       => ULA_out_debug,
+            PC_out_debug        => PC_out_debug
         );
 
     UC : ENTITY work.unidadeControle

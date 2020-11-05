@@ -240,6 +240,11 @@ set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
 set_global_assignment -name VHDL_SHOW_LMF_MAPPING_MESSAGES OFF
+
+set_global_assignment -name VHDL_FILE somadorGenerico.vhd
+set_global_assignment -name VHDL_FILE muxGenerico.vhd
+set_global_assignment -name VHDL_FILE estendeSinalGenerico.vhd
+set_global_assignment -name VHDL_FILE RAMMIPS.vhd
 set_global_assignment -name VHDL_FILE flipFlopGenerico.vhd
 set_global_assignment -name VHDL_FILE unidadeControle.vhd
 set_global_assignment -name VHDL_FILE fluxoDados.vhd
@@ -250,4 +255,5 @@ set_global_assignment -name VHDL_FILE ROMMIPS.vhd
 set_global_assignment -name VHDL_FILE bancoRegistradores.vhd
 set_global_assignment -name VHDL_FILE ULA.vhd
 set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform.vwf
+set_global_assignment -name VECTOR_WAVEFORM_FILE Waveform1.vwf
 set_instance_assignment -name PARTITION_HIERARCHY root_partition -to | -section_id Top
