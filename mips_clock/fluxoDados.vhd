@@ -41,6 +41,8 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL bancoReg_outA    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL bancoReg_outB    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL ULA_flagZero_out : STD_LOGIC;
+    SIGNAL imedTipoI_ext    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL muxRtMem_out     : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao tipo R
     ALIAS instOpCode : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) IS instrucao(31 DOWNTO 26);
@@ -100,6 +102,16 @@ BEGIN
             Dado     => instrucao
         );
 
+    estendeImedTipoI : ENTITY work.estendeSinalGenerico
+        GENERIC MAP(
+            larguraDadoEntrada => 16,
+            larguraDadoSaida   => DATA_WIDTH
+        )
+        PORT MAP(
+            estendeSinal_IN  => imedTipoI,
+            estendeSinal_OUT => imedTipoI_ext
+        );
+
     bancoRegs : ENTITY work.bancoRegistradores
         GENERIC MAP(
             larguraDados        => DATA_WIDTH,
@@ -116,6 +128,17 @@ BEGIN
             saidaB       => bancoReg_outB
         );
 
+    muxRtMem : ENTITY work.muxGenerico2x1
+        GENERIC MAP(
+            larguraDados => DATA_WIDTH
+        )
+        PORT MAP(
+            entradaA_MUX => bancoReg_outB,
+            entradaB_MUX => imedTipoI_ext,
+            seletor_MUX  => selMuxRtImed,
+            saida_MUX    => muxRtMem_out
+        );
+
     ULA : ENTITY work.ULA
         GENERIC MAP(
             larguraDados => DATA_WIDTH,
@@ -123,7 +146,7 @@ BEGIN
         )
         PORT MAP(
             entradaA => bancoReg_outA,
-            entradaB => bancoReg_outB,
+            entradaB => muxRtMem_out,
             seletor  => operacaoULA,
             saida    => ULA_out,
             flagZero => ULA_flagZero_out
