@@ -39,24 +39,53 @@ ARCHITECTURE main OF unidadeControle IS
     -- Declarando onde cada ponto de controle sera localizado na palavra de controle.
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
     ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(SELETOR_ULA DOWNTO 1);
+    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(SELETOR_ULA + 1);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(SELETOR_ULA + 2);
+    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(SELETOR_ULA + 3);
+    ALIAS beq                 : STD_LOGIC IS palavraControle(SELETOR_ULA + 4);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 5);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 6);
 
     -- Tipos de instrucoes.
     -- TODO: implementar tipo I e tipo J.
     CONSTANT tipoR : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
     SIGNAL isTipoR : STD_LOGIC;
-    CONSTANT tipoI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001100";
+
+    CONSTANT opcodeLoad  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
+    CONSTANT opcodeStore : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
+    CONSTANT opcodeBeq   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
+
     SIGNAL isTipoI : STD_LOGIC;
-    CONSTANT tipoJ : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001100";
     SIGNAL isTipoJ : STD_LOGIC;
 BEGIN
     -- Verificando qual o tipo de instrucao a ser executada.
     isTipoR <= '1' WHEN (opcode = tipoR) ELSE
         '0';
 
+    isTipoI <= '1' WHEN (opcode = opcodeLoad OR opcode = opcodeStore OR opcode = opcodeBeq) ELSE
+        '0';
+
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
-    habEscritaBancoRegs <= isTipoR;
+    habEscritaBancoRegs <= '1' WHEN (isTipoR = '1' OR (opcode = opcodeLoad)) ELSE
+        '0';
 
     operacaoULA <= funct WHEN (isTipoR) ELSE
+        "000001" WHEN (opcode = opcodeLoad) ELSE
+        "000001" WHEN (opcode = opcodeStore) ELSE
+        "000010" WHEN (opcode = opcodeBeq) ELSE
         "000000";
+
+    selMuxRtRd <= NOT isTipoI;
+
+    selMuxRtImed <= isTipoI;
+
+    selMuxULAMem <= '1' WHEN (opcode = opcodeLoad) ELSE
+        '0';
+
+    beq <= '1' WHEN (opcode = opcodeBeq) ELSE
+        '0';
+
+    habEscritaMEM <= '1' WHEN (opcode = opcodeStore) ELSE
+        '0';
 END ARCHITECTURE;
