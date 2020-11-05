@@ -20,6 +20,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -38,6 +39,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 </modelsim_script_timing>
 <hdl_lang>vhdl</hdl_lang>
 </simulation_settings>*/
@@ -3038,11 +3040,10 @@ TRANSITION_LIST("CLOCK_50")
 		REPEAT = 1;
 		NODE
 		{
-			REPEAT = 8;
-			LEVEL 0 FOR 60.0;
-			LEVEL 1 FOR 60.0;
+			REPEAT = 50;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 40.0;
 	}
 }
 
@@ -5231,7 +5232,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 77;
 	TREE_LEVEL = 0;
 	CHILDREN = 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109;
@@ -5241,7 +5242,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[31]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 78;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5251,7 +5252,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[30]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 79;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5261,7 +5262,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[29]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 80;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5271,7 +5272,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[28]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 81;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5281,7 +5282,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[27]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 82;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5291,7 +5292,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[26]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 83;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5301,7 +5302,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[25]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 84;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5311,7 +5312,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[24]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 85;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5321,7 +5322,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[23]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 86;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5331,7 +5332,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[22]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 87;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5341,7 +5342,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[21]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 88;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5351,7 +5352,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[20]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 89;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5361,7 +5362,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[19]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 90;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5371,7 +5372,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[18]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 91;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5381,7 +5382,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[17]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 92;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5391,7 +5392,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[16]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 93;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5401,7 +5402,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[15]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 94;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5411,7 +5412,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[14]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 95;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5421,7 +5422,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[13]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 96;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5431,7 +5432,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[12]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 97;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5441,7 +5442,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[11]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 98;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5451,7 +5452,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[10]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 99;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5461,7 +5462,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[9]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 100;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5471,7 +5472,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[8]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 101;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5481,7 +5482,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[7]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 102;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5491,7 +5492,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[6]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 103;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5501,7 +5502,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[5]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 104;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5511,7 +5512,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[4]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 105;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5521,7 +5522,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[3]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 106;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5531,7 +5532,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[2]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 107;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5541,7 +5542,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[1]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 108;
 	TREE_LEVEL = 1;
 	PARENT = 77;
@@ -5551,7 +5552,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "PC_out_debug[0]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 109;
 	TREE_LEVEL = 1;
 	PARENT = 77;
