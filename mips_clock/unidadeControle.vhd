@@ -45,6 +45,7 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS beq                 : STD_LOGIC IS palavraControle(SELETOR_ULA + 4);
     ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 5);
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 6);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(SELETOR_ULA + 7);
 
     -- Tipos de instrucoes.
     -- TODO: implementar tipo I e tipo J.
@@ -54,6 +55,7 @@ ARCHITECTURE main OF unidadeControle IS
     CONSTANT opcodeLoad  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
     CONSTANT opcodeStore : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
     CONSTANT opcodeBeq   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
+    CONSTANT opcodeJmp   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000010";
 
     SIGNAL isTipoI : STD_LOGIC;
     SIGNAL isTipoJ : STD_LOGIC;
@@ -87,5 +89,8 @@ BEGIN
         '0';
 
     habEscritaMEM <= '1' WHEN (opcode = opcodeStore) ELSE
+        '0';
+
+    selMuxJmp <= '1' WHEN (opcode = opcodeJmp) ELSE
         '0';
 END ARCHITECTURE;
