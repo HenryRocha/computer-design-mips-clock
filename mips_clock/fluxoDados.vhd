@@ -46,6 +46,8 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL muxRtRd_out      : STD_LOGIC_VECTOR(REG_END_WIDTH - 1 DOWNTO 0);
     SIGNAL RAM_out          : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL muxULAMem_out    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL somaImedPc4_out  : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+    SIGNAL muxBeq_out       : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao tipo R
     ALIAS instOpCode : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) IS instrucao(31 DOWNTO 26);
@@ -76,7 +78,7 @@ BEGIN
             larguraDados => ADDR_WIDTH
         )
         PORT MAP(
-            DIN    => somaUm_out,
+            DIN    => muxBeq_out,
             DOUT   => PC_out,
             ENABLE => '1',
             CLK    => clk,
@@ -91,6 +93,27 @@ BEGIN
         PORT MAP(
             entrada => PC_out,
             saida   => somaUm_out
+        );
+
+    somaImedPc4 : ENTITY work.somadorGenerico
+        GENERIC MAP(
+            larguraDados => ADDR_WIDTH
+        )
+        PORT MAP(
+            entradaA => somaUm_out,
+            entradaB => imedTipoI_ext(29 DOWNTO 0) & "00",
+            saida    => somaImedPc4_out
+        );
+
+    muxBeq : ENTITY work.muxGenerico2x1
+        GENERIC MAP(
+            larguraDados => ADDR_WIDTH
+        )
+        PORT MAP(
+            entradaA_MUX => somaUm_out,
+            entradaB_MUX => somaImedPc4_out,
+            seletor_MUX  => beq,
+            saida_MUX    => muxBeq_out
         );
 
     ROM : ENTITY work.ROMMIPS
