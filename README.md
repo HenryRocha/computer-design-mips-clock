@@ -8,6 +8,7 @@ Projeto de Design de Computadores com o objetivo de criar um processador com arq
 - [X] Impletação de instruções tipo I
 - [X] Impletação de instruções tipo J
 - [X] Subgrupo A
+- [X] Fofão
 - [ ] Subgrupo B
 - [ ] UC para Opcode
 - [ ] UC para ULA
