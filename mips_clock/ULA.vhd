@@ -39,6 +39,7 @@ ARCHITECTURE comportamento OF ULA IS
     SIGNAL op_sub         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
     SIGNAL op_or          : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
     SIGNAL op_and         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_slt         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
 
     -- Sinal temporario usado durante a comparacao com a constante "zero".
     SIGNAL saidaTemp : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
@@ -51,12 +52,15 @@ BEGIN
     op_sub         <= STD_LOGIC_VECTOR(unsigned(entradaA) - unsigned(entradaB));
     op_and         <= entradaA AND entradaB;
     op_or          <= entradaA OR entradaB;
+    op_slt         <= STD_LOGIC_VECTOR(to_unsigned(1, larguraDados)) WHEN unsigned(entradaA) < unsigned(entradaB) ELSE
+        (OTHERS => '0');
 
     -- Verificando qual operacaoo deve ser atribuida a "saidaTemp".
     saidaTemp <= op_soma WHEN (seletor = "100000") ELSE
         op_sub WHEN (seletor = "100010") ELSE
         op_or WHEN (seletor = "100101") ELSE
         op_and WHEN (seletor = "100100") ELSE
+        op_slt WHEN (seletor = "101010") ELSE
         entradaA;
 
     -- Atribuindo "saida" a "saidaTemp" e realizando a comparacao para verificar se

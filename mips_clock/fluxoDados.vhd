@@ -49,6 +49,7 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL muxULAMem_out    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL somaImedPc4_out  : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
     SIGNAL muxBeq_out       : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+    SIGNAL muxJmp_out       : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao tipo R
     ALIAS instOpCode : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) IS instrucao(31 DOWNTO 26);
@@ -61,6 +62,9 @@ ARCHITECTURE main OF fluxoDados IS
     -- Partes da instrucao tipo I
     ALIAS imedTipoI : STD_LOGIC_VECTOR(15 DOWNTO 0) IS instrucao(15 DOWNTO 0);
 
+    -- Partes da instrucao tipo J
+    ALIAS imedTipoJ : STD_LOGIC_VECTOR(25 DOWNTO 0) IS instrucao(25 DOWNTO 0);
+
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
     ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(SELETOR_ULA DOWNTO 1);
@@ -70,6 +74,7 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS beq                 : STD_LOGIC IS palavraControle(SELETOR_ULA + 4);
     ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 5);
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 6);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(SELETOR_ULA + 7);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -79,7 +84,7 @@ BEGIN
             larguraDados => ADDR_WIDTH
         )
         PORT MAP(
-            DIN    => muxBeq_out,
+            DIN    => muxJmp_out,
             DOUT   => PC_out,
             ENABLE => '1',
             CLK    => clk,
@@ -115,6 +120,17 @@ BEGIN
             entradaB_MUX => somaImedPc4_out,
             seletor_MUX  => beq AND ULA_flagZero_out,
             saida_MUX    => muxBeq_out
+        );
+
+    muxJmp : ENTITY work.muxGenerico2x1
+        GENERIC MAP(
+            larguraDados => ADDR_WIDTH
+        )
+        PORT MAP(
+            entradaA_MUX => muxBeq_out,
+            entradaB_MUX => PC_out(31 DOWNTO 28) & imedTipoJ & "00",
+            seletor_MUX  => selMuxJmp,
+            saida_MUX    => muxJmp_out
         );
 
     ROM : ENTITY work.ROMMIPS
