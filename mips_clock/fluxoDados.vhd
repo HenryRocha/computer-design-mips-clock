@@ -113,7 +113,7 @@ BEGIN
         PORT MAP(
             entradaA_MUX => somaUm_out,
             entradaB_MUX => somaImedPc4_out,
-            seletor_MUX  => beq,
+            seletor_MUX  => beq AND ULA_flagZero_out,
             saida_MUX    => muxBeq_out
         );
 
