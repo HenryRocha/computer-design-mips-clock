@@ -44,6 +44,8 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL imedTipoI_ext    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL muxRtMem_out     : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL muxRtRd_out      : STD_LOGIC_VECTOR(REG_END_WIDTH - 1 DOWNTO 0);
+    SIGNAL RAM_out          : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL muxULAMem_out    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao tipo R
     ALIAS instOpCode : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) IS instrucao(31 DOWNTO 26);
@@ -134,7 +136,7 @@ BEGIN
             enderecoA    => rs,
             enderecoB    => rt,
             enderecoC    => muxRtRd_out,
-            dadoEscritaC => ULA_out,
+            dadoEscritaC => muxULAMem_out,
             escreveC     => habEscritaBancoRegs,
             saidaA       => bancoReg_outA,
             saidaB       => bancoReg_outB
@@ -162,6 +164,31 @@ BEGIN
             seletor  => operacaoULA,
             saida    => ULA_out,
             flagZero => ULA_flagZero_out
+        );
+
+    RAM : ENTITY work.RAMMIPS
+        GENERIC MAP(
+            dataWidth       => DATA_WIDTH,
+            addrWidth       => DATA_WIDTH,
+            memoryAddrWidth => 6
+        )
+        PORT MAP(
+            clk      => clk,
+            Endereco => ULA_out,
+            Dado_in  => bancoReg_outB,
+            Dado_out => RAM_out,
+            we       => habEscritaMEM
+        );
+
+    muxULAMem : ENTITY work.muxGenerico2x1
+        GENERIC MAP(
+            larguraDados => DATA_WIDTH
+        )
+        PORT MAP(
+            entradaA_MUX => ULA_out,
+            entradaB_MUX => RAM_out,
+            seletor_MUX  => selMuxULAMem,
+            saida_MUX    => muxULAMem_out
         );
 
     flipFlopFlagZero : ENTITY work.flipFlopGenerico
