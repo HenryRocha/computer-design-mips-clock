@@ -28,7 +28,8 @@ ENTITY fluxoDados IS
         -- Saidas para simulacao
         bancoReg_outA_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
         bancoReg_outB_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        ULA_out_debug       : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
+        ULA_out_debug       : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        PC_out_debug        : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -230,4 +231,5 @@ BEGIN
     bancoReg_outA_debug <= bancoReg_outA;
     bancoReg_outB_debug <= bancoReg_outB;
     ULA_out_debug       <= ULA_out;
+    PC_out_debug        <= PC_out;
 END ARCHITECTURE;

@@ -36,7 +36,8 @@ ENTITY mips_clock IS
         flagZero_debug        : OUT STD_LOGIC;
         bancoReg_outA_debug   : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
         bancoReg_outB_debug   : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        ULA_out_debug         : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
+        ULA_out_debug         : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        PC_out_debug          : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -68,7 +69,8 @@ BEGIN
             -- Saida para simulacao
             bancoReg_outA_debug => bancoReg_outA_debug,
             bancoReg_outB_debug => bancoReg_outB_debug,
-            ULA_out_debug       => ULA_out_debug
+            ULA_out_debug       => ULA_out_debug,
+            PC_out_debug        => PC_out_debug
         );
 
     UC : ENTITY work.unidadeControle
