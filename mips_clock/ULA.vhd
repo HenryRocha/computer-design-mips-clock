@@ -53,13 +53,10 @@ BEGIN
     op_or          <= entradaA OR entradaB;
 
     -- Verificando qual operacaoo deve ser atribuida a "saidaTemp".
-    saidaTemp <= op_soma_zero WHEN (seletor = "000000") ELSE
-        op_soma WHEN (seletor = "000001") ELSE
-        op_sub WHEN (seletor = "000010") ELSE
-        op_soma_b_zero WHEN (seletor = "000011") ELSE
-        op_soma_a_zero WHEN (seletor = "000100") ELSE
-        op_or WHEN (seletor = "000101") ELSE
-        op_and WHEN (seletor = "000110") ELSE
+    saidaTemp <= op_soma WHEN (seletor = "100000") ELSE
+        op_sub WHEN (seletor = "100010") ELSE
+        op_or WHEN (seletor = "100101") ELSE
+        op_and WHEN (seletor = "100100") ELSE
         entradaA;
 
     -- Atribuindo "saida" a "saidaTemp" e realizando a comparacao para verificar se
