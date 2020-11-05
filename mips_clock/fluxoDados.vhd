@@ -43,6 +43,7 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL ULA_flagZero_out : STD_LOGIC;
     SIGNAL imedTipoI_ext    : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
     SIGNAL muxRtMem_out     : STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+    SIGNAL muxRtRd_out      : STD_LOGIC_VECTOR(REG_END_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao tipo R
     ALIAS instOpCode : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) IS instrucao(31 DOWNTO 26);
@@ -112,6 +113,17 @@ BEGIN
             estendeSinal_OUT => imedTipoI_ext
         );
 
+    muxRtRd : ENTITY work.muxGenerico2x1
+        GENERIC MAP(
+            larguraDados => REG_END_WIDTH
+        )
+        PORT MAP(
+            entradaA_MUX => rt,
+            entradaB_MUX => rd,
+            seletor_MUX  => selMuxRtRd,
+            saida_MUX    => muxRtRd_out
+        );
+
     bancoRegs : ENTITY work.bancoRegistradores
         GENERIC MAP(
             larguraDados        => DATA_WIDTH,
@@ -121,7 +133,7 @@ BEGIN
             clk          => clk,
             enderecoA    => rs,
             enderecoB    => rt,
-            enderecoC    => rd,
+            enderecoC    => muxRtRd_out,
             dadoEscritaC => ULA_out,
             escreveC     => habEscritaBancoRegs,
             saidaA       => bancoReg_outA,
