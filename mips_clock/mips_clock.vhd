@@ -16,7 +16,7 @@ ENTITY mips_clock IS
         PALAVRA_CONTROLE_WIDTH : NATURAL := 13;
         SHAMT_WIDTH            : NATURAL := 5;
         SELETOR_ULA            : NATURAL := 6;
-        ADDR_WIDTH             : NATURAL := 9
+        ADDR_WIDTH             : NATURAL := 32
     );
     PORT (
         -- Input ports
