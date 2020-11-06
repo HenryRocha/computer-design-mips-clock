@@ -48,17 +48,26 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(SELETOR_ULA + 7);
 
     -- Tipos de instrucoes.
-    -- TODO: implementar tipo I e tipo J.
     CONSTANT tipoR : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
     SIGNAL isTipoR : STD_LOGIC;
+    SIGNAL isTipoI : STD_LOGIC;
+    SIGNAL isTipoJ : STD_LOGIC;
 
+    -- Opcodes de instrucoes especificas.
     CONSTANT opcodeLoad  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
     CONSTANT opcodeStore : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
     CONSTANT opcodeBeq   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
     CONSTANT opcodeJmp   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000010";
 
-    SIGNAL isTipoI : STD_LOGIC;
-    SIGNAL isTipoJ : STD_LOGIC;
+    -- Todos os tipos de funct possiveis.
+    CONSTANT funct_add : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100000";
+    CONSTANT funct_sub : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100010";
+    CONSTANT funct_or  : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100101";
+    CONSTANT funct_and : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100100";
+    CONSTANT funct_slt : STD_LOGIC_VECTOR(5 DOWNTO 0) := "101010";
+
+    -- Sinais intermediarios.
+    SIGNAL op_ula : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0);
 BEGIN
     -- Verificando qual o tipo de instrucao a ser executada.
     isTipoR <= '1' WHEN (opcode = tipoR) ELSE
@@ -67,20 +76,29 @@ BEGIN
     isTipoI <= '1' WHEN (opcode = opcodeLoad OR opcode = opcodeStore OR opcode = opcodeBeq) ELSE
         '0';
 
+    -- Verificando qual o funct a ser executado.
+    op_ula <= "000" WHEN (funct = funct_add) ELSE
+        "001" WHEN (funct = funct_sub) ELSE
+        "010" WHEN (funct = funct_or) ELSE
+        "011" WHEN (funct = funct_and) ELSE
+        "100" WHEN (funct = funct_slt) ELSE
+        "000";
+
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
     habEscritaBancoRegs <= '1' WHEN (isTipoR = '1' OR (opcode = opcodeLoad)) ELSE
         '0';
 
-    operacaoULA <= funct WHEN (isTipoR) ELSE
-        "000001" WHEN (opcode = opcodeLoad) ELSE
-        "000001" WHEN (opcode = opcodeStore) ELSE
-        "000010" WHEN (opcode = opcodeBeq) ELSE
-        "000000";
+    operacaoULA <= op_ula WHEN (isTipoR) ELSE
+        "000" WHEN (opcode = opcodeLoad) ELSE
+        "000" WHEN (opcode = opcodeStore) ELSE
+        "001" WHEN (opcode = opcodeBeq) ELSE
+        "000";
 
     selMuxRtRd <= NOT isTipoI;
 
-    selMuxRtImed <= isTipoI;
+    selMuxRtImed <= '1' WHEN (isTipoI = '1' AND opcode /= opcodeBeq) ELSE
+        '0';
 
     selMuxULAMem <= '1' WHEN (opcode = opcodeLoad) ELSE
         '0';

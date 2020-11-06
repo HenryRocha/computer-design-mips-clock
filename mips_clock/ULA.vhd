@@ -31,36 +31,30 @@ ARCHITECTURE comportamento OF ULA IS
     -- Declarando a constante "zero", usada para determinar se a saida eh zero ou nao.
     CONSTANT zero : STD_LOGIC_VECTOR(larguraDados - 1 DOWNTO 0) := (OTHERS => '0');
 
-    -- Todas as opera??es que a ULA consegue realizar.
-    SIGNAL op_soma_zero   : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_soma        : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_soma_b_zero : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_soma_a_zero : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_sub         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_or          : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_and         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_slt         : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    -- Todas as operacoes que a ULA consegue realizar.
+    SIGNAL op_soma : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_sub  : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_or   : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_and  : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_slt  : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
 
     -- Sinal temporario usado durante a comparacao com a constante "zero".
     SIGNAL saidaTemp : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
 BEGIN
     -- Realizando todas as operacoes.
-    op_soma_zero   <= zero;
-    op_soma        <= STD_LOGIC_VECTOR(unsigned(entradaA) + unsigned(entradaB));
-    op_soma_b_zero <= STD_LOGIC_VECTOR(unsigned(entradaB));
-    op_soma_a_zero <= STD_LOGIC_VECTOR(unsigned(entradaA));
-    op_sub         <= STD_LOGIC_VECTOR(unsigned(entradaA) - unsigned(entradaB));
-    op_and         <= entradaA AND entradaB;
-    op_or          <= entradaA OR entradaB;
-    op_slt         <= STD_LOGIC_VECTOR(to_unsigned(1, larguraDados)) WHEN unsigned(entradaA) < unsigned(entradaB) ELSE
+    op_soma <= STD_LOGIC_VECTOR(unsigned(entradaA) + unsigned(entradaB));
+    op_sub  <= STD_LOGIC_VECTOR(unsigned(entradaA) - unsigned(entradaB));
+    op_and  <= entradaA AND entradaB;
+    op_or   <= entradaA OR entradaB;
+    op_slt  <= STD_LOGIC_VECTOR(to_unsigned(1, larguraDados)) WHEN unsigned(entradaA) < unsigned(entradaB) ELSE
         (OTHERS => '0');
 
     -- Verificando qual operacaoo deve ser atribuida a "saidaTemp".
-    saidaTemp <= op_soma WHEN (seletor = "100000") ELSE
-        op_sub WHEN (seletor = "100010") ELSE
-        op_or WHEN (seletor = "100101") ELSE
-        op_and WHEN (seletor = "100100") ELSE
-        op_slt WHEN (seletor = "101010") ELSE
+    saidaTemp <= op_soma WHEN (seletor = "000") ELSE
+        op_sub WHEN (seletor = "001") ELSE
+        op_or WHEN (seletor = "010") ELSE
+        op_and WHEN (seletor = "011") ELSE
+        op_slt WHEN (seletor = "100") ELSE
         entradaA;
 
     -- Atribuindo "saida" a "saidaTemp" e realizando a comparacao para verificar se
