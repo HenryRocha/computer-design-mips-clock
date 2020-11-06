@@ -1,24 +1,41 @@
-DEPTH = 64;
-WIDTH = 32;
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions
+-- and other software and tools, and its AMPP partner logic
+-- functions, and any output files from any of the foregoing
+-- (including device programming or simulation files), and any
+-- associated documentation or information are expressly subject
+-- to the terms and conditions of the Intel Program License
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel FPGA IP License Agreement, or other applicable license
+-- agreement, including, without limitation, that your use is for
+-- the sole purpose of programming logic devices manufactured by
+-- Intel and sold by Intel or its authorized distributors.  Please
+-- refer to the applicable agreement for further details.
 
-ADDRESS_RADIX = DEC;
-DATA_RADIX = BIN;
+WIDTH=32;
+DEPTH=64;
+ADDRESS_RADIX=DEC;
+DATA_RADIX=HEX;
 
-CONTENT
-BEGIN
-0:   00000001000010000100000000100000;
-1:   00000001001010010111000000100010;
-2:   00000001010010110111000000100000;
-3:   10101100000011100000000000000000;
-4:   10001100000011110000000000000000;
-5:   00000001111010100111000000100010;
-6:   00000001000010010111000000100100;
-7:   00000001000010010111000000100101;
-8:   00010000000000000000000000000001;
-9:   00000001000010010111000000100100;
-10:   00000001000010010111000000100101;
-11:   00001000000000000000000000001101;
-12:   00000001000010010111000000100100;
-13:   00000001010010110100000000101010;
-[14..63]:   00000000000000000000000000000000;
+CONTENT BEGIN
+      -- Valores iniciais no banco de registradores:
+      -- $zero (#0) := 0x00
+      -- $t0   (#8) := 0x00
+      -- $t1   (#9) := 0x0A
+      -- $t2  (#10) := 0x0B
+      -- $t3  (#11) := 0x0C
+      -- $t4  (#12) := 0x0D
+      -- $t5  (#13) := 0x16
+
+    0    :   AC090008; --sw $t1 8($zero)     (m(8) := 0x0000000A)
+    1    :   8C080008; --lw $t0 8($zero)     ($t0  := 0x0000000A)
+    2    :   012A4022; --sub $t0 $t1 $t2     ($t0  := 0xFFFFFFFF)
+    3    :   012A4024; --and $t0 $t1 $t2     ($t0  := 0x0000000A)
+    4    :   012A4025; --or $t0 $t1 $t2      ($t0  := 0x0000000B)
+    5    :   012A402A; --slt $t0 $t1 $t2     ($t0  := 0x00000001)
+    6    :   010A4020; --add $t0 $t0 $t2     ($t0  := 0x0000000C)
+                       --segunda execução:   ($t0 := 0x00000017)
+    7    :   110BFFFE; --beq $t0 $t3 0xFFFE  (pc := #6)
+                       --segunda execução:   (pc := #8)
+    8    :   08000000; --j 0x000000          (pc := #0)
 END;
