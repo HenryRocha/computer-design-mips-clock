@@ -21,6 +21,7 @@ after 2500 simTimestamp
 run -all
 quit -f
 
+
 </modelsim_script>
 <modelsim_script_timing>onerror {exit -code 1}
 vlib work
@@ -39,6 +40,7 @@ proc simTimestamp {} {
 after 2500 simTimestamp
 run -all
 quit -f
+
 
 </modelsim_script_timing>
 <hdl_lang>vhdl</hdl_lang>
@@ -3040,11 +3042,10 @@ TRANSITION_LIST("CLOCK_50")
 		REPEAT = 1;
 		NODE
 		{
-			REPEAT = 12;
-			LEVEL 0 FOR 40.0;
-			LEVEL 1 FOR 40.0;
+			REPEAT = 50;
+			LEVEL 0 FOR 10.0;
+			LEVEL 1 FOR 10.0;
 		}
-		LEVEL 0 FOR 40.0;
 	}
 }
 
@@ -5633,7 +5634,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 117;
 	TREE_LEVEL = 0;
 	CHILDREN = 118, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128, 129, 130;
@@ -5643,7 +5644,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[12]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 118;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5653,7 +5654,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[11]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 119;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5663,7 +5664,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[10]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 120;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5673,7 +5674,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[9]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 121;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5683,7 +5684,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[8]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 122;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5693,7 +5694,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[7]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 123;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5703,7 +5704,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[6]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 124;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5713,7 +5714,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[5]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 125;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5723,7 +5724,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[4]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 126;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5733,7 +5734,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[3]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 127;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5743,7 +5744,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[2]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 128;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5753,7 +5754,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[1]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 129;
 	TREE_LEVEL = 1;
 	PARENT = 117;
@@ -5763,7 +5764,7 @@ DISPLAY_LINE
 {
 	CHANNEL = "palavraControle_debug[0]";
 	EXPAND_STATUS = COLLAPSED;
-	RADIX = Binary;
+	RADIX = Unsigned;
 	TREE_INDEX = 130;
 	TREE_LEVEL = 1;
 	PARENT = 117;
