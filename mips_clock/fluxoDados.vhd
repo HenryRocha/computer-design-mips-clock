@@ -7,15 +7,16 @@ USE ieee.std_logic_1164.ALL;
 
 ENTITY fluxoDados IS
     GENERIC (
-        DATA_WIDTH             : NATURAL := 8;
-        INST_WIDTH             : NATURAL := 32;
-        OPCODE_WIDTH           : NATURAL := 6;
-        REG_END_WIDTH          : NATURAL := 6;
-        FUNCT_WIDTH            : NATURAL := 6;
-        PALAVRA_CONTROLE_WIDTH : NATURAL := 6;
-        SHAMT_WIDTH            : NATURAL := 6;
-        SELETOR_ULA            : NATURAL := 3;
-        ADDR_WIDTH             : NATURAL := 32
+        DATA_WIDTH             : NATURAL := 888;
+        INST_WIDTH             : NATURAL := 888;
+        OPCODE_WIDTH           : NATURAL := 888;
+        REG_END_WIDTH          : NATURAL := 888;
+        FUNCT_WIDTH            : NATURAL := 888;
+        PALAVRA_CONTROLE_WIDTH : NATURAL := 888;
+        SHAMT_WIDTH            : NATURAL := 888;
+        ULAOP_WIDTH            : NATURAL := 888;
+        ADDR_WIDTH             : NATURAL := 888;
+        SELETOR_ULA_WIDTH      : NATURAL := 888
     );
     PORT (
         -- Input ports
@@ -29,7 +30,8 @@ ENTITY fluxoDados IS
         bancoReg_outA_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
         bancoReg_outB_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
         ULA_out_debug       : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        PC_out_debug        : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0)
+        PC_out_debug        : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+        selULA_debug        : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -50,6 +52,7 @@ ARCHITECTURE main OF fluxoDados IS
     SIGNAL somaImedPc4_out  : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
     SIGNAL muxBeq_out       : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
     SIGNAL muxJmp_out       : STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+    SIGNAL selULA           : STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0);
 
     -- Partes da instrucao tipo R
     ALIAS instOpCode : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) IS instrucao(31 DOWNTO 26);
@@ -67,14 +70,14 @@ ARCHITECTURE main OF fluxoDados IS
 
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
-    ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(SELETOR_ULA DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(SELETOR_ULA + 1);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(SELETOR_ULA + 2);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(SELETOR_ULA + 3);
-    ALIAS beq                 : STD_LOGIC IS palavraControle(SELETOR_ULA + 4);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 5);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 6);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(SELETOR_ULA + 7);
+    ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(ULAOP_WIDTH DOWNTO 1);
+    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 1);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 2);
+    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 3);
+    ALIAS beq                 : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 4);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 5);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 6);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 7);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -193,15 +196,27 @@ BEGIN
             saida_MUX    => muxRtMem_out
         );
 
+    UC_ULA : ENTITY work.unidadeControleULA
+        GENERIC MAP(
+            FUNCT_WIDTH       => FUNCT_WIDTH,
+            ULAOP_WIDTH       => ULAOP_WIDTH,
+            SELETOR_ULA_WIDTH => SELETOR_ULA_WIDTH
+        )
+        PORT MAP(
+            ULA_OP     => ula_op,
+            funct      => instFunct,
+            UC_ULA_OUT => selULA
+        );
+
     ULA : ENTITY work.ULA
         GENERIC MAP(
             larguraDados => DATA_WIDTH,
-            SEL_WIDTH    => SELETOR_ULA
+            SEL_WIDTH    => SELETOR_ULA_WIDTH
         )
         PORT MAP(
             entradaA => bancoReg_outA,
             entradaB => muxRtMem_out,
-            seletor  => operacaoULA,
+            seletor  => selULA,
             saida    => ULA_out,
             flagZero => ULA_flagZero_out
         );
@@ -248,4 +263,5 @@ BEGIN
     bancoReg_outB_debug <= bancoReg_outB;
     ULA_out_debug       <= ULA_out;
     PC_out_debug        <= PC_out;
+    selULA_debug        <= selULA;
 END ARCHITECTURE;

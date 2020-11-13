@@ -6,22 +6,22 @@ LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
 
--- A unidade de controle � respons�vel por gerar os pontos de controle com base na instru��o sendo utilizada
--- A instru��o � interpretada baseada no OpCode passado
+-- A unidade de controle eh responsavel por gerar os pontos de controle com base na instrucao sendo utilizada
+-- A instrucao eh interpretada baseada no OpCode passado
 -- Com isso, geramos um vetor de 8 bits, onde cada um representa um ponto de controle
 
 ENTITY unidadeControle IS
     GENERIC (
-        DATA_WIDTH             : NATURAL := 8;
-        INST_WIDTH             : NATURAL := 32;
-        NUM_INST               : NATURAL := 2;
-        OPCODE_WIDTH           : NATURAL := 6;
-        REG_END_WIDTH          : NATURAL := 6;
-        FUNCT_WIDTH            : NATURAL := 6;
-        PALAVRA_CONTROLE_WIDTH : NATURAL := 6;
-        SHAMT_WIDTH            : NATURAL := 6;
-        SELETOR_ULA            : NATURAL := 3;
-        ADDR_WIDTH             : NATURAL := 32
+        DATA_WIDTH             : NATURAL := 888;
+        INST_WIDTH             : NATURAL := 888;
+        NUM_INST               : NATURAL := 888;
+        OPCODE_WIDTH           : NATURAL := 888;
+        REG_END_WIDTH          : NATURAL := 888;
+        FUNCT_WIDTH            : NATURAL := 888;
+        PALAVRA_CONTROLE_WIDTH : NATURAL := 888;
+        SHAMT_WIDTH            : NATURAL := 888;
+        ULAOP_WIDTH            : NATURAL := 888;
+        ADDR_WIDTH             : NATURAL := 888
     );
     PORT (
         -- Input ports
@@ -38,77 +38,55 @@ END ENTITY;
 ARCHITECTURE main OF unidadeControle IS
     -- Declarando onde cada ponto de controle sera localizado na palavra de controle.
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
-    ALIAS operacaoULA         : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0) IS palavraControle(SELETOR_ULA DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(SELETOR_ULA + 1);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(SELETOR_ULA + 2);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(SELETOR_ULA + 3);
-    ALIAS beq                 : STD_LOGIC IS palavraControle(SELETOR_ULA + 4);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 5);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(SELETOR_ULA + 6);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(SELETOR_ULA + 7);
+    ALIAS ulaOP               : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(ULAOP_WIDTH DOWNTO 1);
+    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 1);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 2);
+    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 3);
+    ALIAS branch              : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 4);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 5);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 6);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 7);
 
-    -- Tipos de instrucoes.
-    CONSTANT tipoR : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
-    SIGNAL isTipoR : STD_LOGIC;
-    SIGNAL isTipoI : STD_LOGIC;
-    SIGNAL isTipoJ : STD_LOGIC;
+    -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
+    -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o
+    -- processador tem.
+    SIGNAL instrucao : STD_LOGIC_VECTOR(NUM_INST - 1 DOWNTO 0);
+    -- Declarando qual bit do vetor eh cada instrucao.
+    ALIAS isTipoR : STD_LOGIC IS instrucao(0);
+    ALIAS isLW    : STD_LOGIC IS instrucao(1);
+    ALIAS isSW    : STD_LOGIC IS instrucao(2);
+    ALIAS isBEQ   : STD_LOGIC IS instrucao(3);
+    ALIAS isJ     : STD_LOGIC IS instrucao(4);
 
-    -- Opcodes de instrucoes especificas.
-    CONSTANT opcodeLoad  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
-    CONSTANT opcodeStore : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
-    CONSTANT opcodeBeq   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
-    CONSTANT opcodeJmp   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000010";
-
-    -- Todos os tipos de funct possiveis.
-    CONSTANT funct_add : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100000";
-    CONSTANT funct_sub : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100010";
-    CONSTANT funct_or  : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100101";
-    CONSTANT funct_and : STD_LOGIC_VECTOR(5 DOWNTO 0) := "100100";
-    CONSTANT funct_slt : STD_LOGIC_VECTOR(5 DOWNTO 0) := "101010";
-
-    -- Sinais intermediarios.
-    SIGNAL op_ula : STD_LOGIC_VECTOR(SELETOR_ULA - 1 DOWNTO 0);
+    -- Declarando todas as intrucoes da CPU e seus OpCodes.
+    CONSTANT tipoR     : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
+    CONSTANT opcodeLW  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
+    CONSTANT opcodeSW  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
+    CONSTANT opcodeBEQ : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
+    CONSTANT opcodeJ   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000010";
 BEGIN
-    -- Verificando qual o tipo de instrucao a ser executada.
-    isTipoR <= '1' WHEN (opcode = tipoR) ELSE
-        '0';
-
-    isTipoI <= '1' WHEN (opcode = opcodeLoad OR opcode = opcodeStore OR opcode = opcodeBeq) ELSE
-        '0';
-
-    -- Verificando qual o funct a ser executado.
-    op_ula <= "000" WHEN (funct = funct_add) ELSE
-        "001" WHEN (funct = funct_sub) ELSE
-        "010" WHEN (funct = funct_or) ELSE
-        "011" WHEN (funct = funct_and) ELSE
-        "100" WHEN (funct = funct_slt) ELSE
-        "000";
+    -- Verificando qual a instrucao a ser executada.
+    WITH opcode SELECT
+        instrucao <= "00001" WHEN tipoR,
+        "00010" WHEN opcodeLW,
+        "00100" WHEN opcodeSW,
+        "01000" WHEN opcodeBEQ,
+        "10000" WHEN opcodeJ,
+        "00000" WHEN OTHERS;
 
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
-    habEscritaBancoRegs <= '1' WHEN (isTipoR = '1' OR (opcode = opcodeLoad)) ELSE
-        '0';
+    habEscritaBancoRegs <= isTipoR;
+    selMuxRtRd          <= isTipoR;
+    selMuxRtImed        <= isLW OR isSW;
+    selMuxULAMem        <= isLW;
+    branch              <= isBEQ;
+    habEscritaMEM       <= isSW;
+    habLeituraMEM       <= isLW;
+    selMuxJmp           <= isJ;
 
-    operacaoULA <= op_ula WHEN (isTipoR) ELSE
-        "000" WHEN (opcode = opcodeLoad) ELSE
-        "000" WHEN (opcode = opcodeStore) ELSE
-        "001" WHEN (opcode = opcodeBeq) ELSE
-        "000";
-
-    selMuxRtRd <= NOT isTipoI;
-
-    selMuxRtImed <= '1' WHEN (isTipoI = '1' AND opcode /= opcodeBeq) ELSE
-        '0';
-
-    selMuxULAMem <= '1' WHEN (opcode = opcodeLoad) ELSE
-        '0';
-
-    beq <= '1' WHEN (opcode = opcodeBeq) ELSE
-        '0';
-
-    habEscritaMEM <= '1' WHEN (opcode = opcodeStore) ELSE
-        '0';
-
-    selMuxJmp <= '1' WHEN (opcode = opcodeJmp) ELSE
-        '0';
+    ulaOP <= "00" WHEN (isLW OR isSW) ELSE
+        "01" WHEN (isBEQ) ELSE
+        "10" WHEN (isTipoR) ELSE
+        "00";
 END ARCHITECTURE;
