@@ -12,8 +12,8 @@ USE ieee.numeric_std.ALL;
 
 ENTITY ULA IS
     GENERIC (
-        larguraDados : NATURAL := 888;
-        SEL_WIDTH    : NATURAL := 888
+        larguraDados : NATURAL := 32;
+        SEL_WIDTH    : NATURAL := 3
     );
     PORT (
         -- Input ports 
@@ -28,38 +28,58 @@ ENTITY ULA IS
 END ENTITY;
 
 ARCHITECTURE comportamento OF ULA IS
-    -- Declarando a constante "zero", usada para determinar se a saida eh zero ou nao.
-    CONSTANT zero : STD_LOGIC_VECTOR(larguraDados - 1 DOWNTO 0) := (OTHERS => '0');
-
-    -- Todas as operacoes que a ULA consegue realizar.
-    SIGNAL op_add : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_sub : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_or  : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_and : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-    SIGNAL op_slt : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
-
-    -- Sinal temporario usado durante a comparacao com a constante "zero".
-    SIGNAL saidaTemp : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    -- Sinais intermediarios
+    SIGNAL norTemp      : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL entradaB_inv : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_and       : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_or        : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL op_slt       : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL adder_out    : STD_LOGIC_VECTOR((larguraDados - 1) DOWNTO 0);
+    SIGNAL overflow     : STD_LOGIC;
 BEGIN
+    -- Invertendo a entradaB, de acordo com o seletor(2).
+    muxinverteB : ENTITY work.muxGenerico2x1
+        GENERIC MAP(
+            larguraDados => larguraDados
+        )
+        PORT MAP(
+            entradaA_MUX => entradaB,
+            entradaB_MUX => NOT entradaB,
+            seletor_MUX  => seletor(2),
+            saida_MUX    => entradaB_inv
+        );
+
     -- Realizando todas as operacoes.
-    op_add <= STD_LOGIC_VECTOR(unsigned(entradaA) + unsigned(entradaB));
-    op_sub <= STD_LOGIC_VECTOR(unsigned(entradaA) - unsigned(entradaB));
+    adderSubber : ENTITY work.adder
+        GENERIC MAP(
+            DATA_WIDTH => larguraDados
+        )
+        PORT MAP(
+            entradaA => entradaA,
+            entradaB => entradaB_inv,
+            vem_um   => seletor(2),
+            soma     => adder_out,
+            overflow => overflow
+        );
+
     op_and <= entradaA AND entradaB;
     op_or  <= entradaA OR entradaB;
-    op_slt <= STD_LOGIC_VECTOR(to_unsigned(1, larguraDados)) WHEN unsigned(entradaA) < unsigned(entradaB) ELSE
-        (OTHERS => '0');
+    op_slt <= "0000000000000000000000000000000" & (adder_out(larguraDados - 1) XOR overflow);
 
-    -- Verificando qual operacaoo deve ser atribuida a "saidaTemp".
-    saidaTemp <= op_and WHEN (seletor = "000") ELSE
-        op_or WHEN (seletor = "001") ELSE
-        op_add WHEN (seletor = "010") ELSE
-        op_sub WHEN (seletor = "110") ELSE
-        op_slt WHEN (seletor = "111") ELSE
-        entradaA;
+    -- Selecionando a operacao de acordo com o seletor.
+    mux : ENTITY work.mux4x1
+        GENERIC MAP(
+            DATA_WIDTH => larguraDados
+        )
+        PORT MAP(
+            entradaA => op_and,
+            entradaB => op_or,
+            entradaC => adder_out,
+            entradaD => op_slt,
+            seletor  => seletor(1 DOWNTO 0),
+            saida    => saida
+        );
 
-    -- Atribuindo "saida" a "saidaTemp" e realizando a comparacao para verificar se
-    -- o resultado eh zero.
-    saida    <= saidaTemp;
-    flagZero <= '1' WHEN unsigned(saidaTemp) = unsigned(zero) ELSE
+    flagZero <= '1' WHEN unsigned(saida) = 0 ELSE
         '0';
 END ARCHITECTURE;
