@@ -9,6 +9,6 @@ Projeto de Design de Computadores com o objetivo de criar um processador com arq
 - [X] Impletação de instruções tipo J
 - [X] Subgrupo A
 - [ ] Subgrupo B
-- [ ] UC para Opcode
-- [ ] UC para ULA
-- [ ] ULA bit a bit
+- [X] UC para Opcode
+- [X] UC para ULA
+- [X] ULA bit a bit
