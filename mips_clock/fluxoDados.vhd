@@ -148,13 +148,14 @@ BEGIN
             Dado     => instrucao
         );
 
-    estendeImedTipoI : ENTITY work.estendeSinalGenerico
+    estendeImedTipoI : ENTITY work.signalExtender
         GENERIC MAP(
             larguraDadoEntrada => 16,
             larguraDadoSaida   => DATA_WIDTH
         )
         PORT MAP(
             estendeSinal_IN  => imedTipoI,
+            seletor          => '0',
             estendeSinal_OUT => imedTipoI_ext
         );
 
