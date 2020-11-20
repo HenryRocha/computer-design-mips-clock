@@ -28,11 +28,12 @@ ENTITY fluxoDados IS
         funct    : OUT STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
         flagZero : OUT STD_LOGIC;
         -- Saidas para simulacao
-        bancoReg_outA_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        bancoReg_outB_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        ULA_out_debug       : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        PC_out_debug        : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
-        selULA_debug        : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0)
+        bancoReg_outA_debug           : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        bancoReg_outB_debug           : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        ULA_out_debug                 : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        PC_out_debug                  : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+        selULA_debug                  : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0);
+        mux_ULA_MEM_LUI_JAL_out_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -264,9 +265,10 @@ BEGIN
     funct  <= instFunct;
 
     -- Saidas de simulacao
-    bancoReg_outA_debug <= bancoReg_outA;
-    bancoReg_outB_debug <= bancoReg_outB;
-    ULA_out_debug       <= ULA_out;
-    PC_out_debug        <= PC_out;
-    selULA_debug        <= selULA;
+    bancoReg_outA_debug           <= bancoReg_outA;
+    bancoReg_outB_debug           <= bancoReg_outB;
+    ULA_out_debug                 <= ULA_out;
+    PC_out_debug                  <= PC_out;
+    selULA_debug                  <= selULA;
+    mux_ULA_MEM_LUI_JAL_out_debug <= muxULAMem_out;
 END ARCHITECTURE;

@@ -32,15 +32,16 @@ ENTITY mips_clock IS
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0);
 
         -- Saidas para simulacao
-        palavraControle_debug : OUT STD_LOGIC_VECTOR(PALAVRA_CONTROLE_WIDTH - 1 DOWNTO 0);
-        opCode_debug          : OUT STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0);
-        funct_debug           : OUT STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
-        flagZero_debug        : OUT STD_LOGIC;
-        bancoReg_outA_debug   : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        bancoReg_outB_debug   : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        ULA_out_debug         : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        PC_out_debug          : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        selULA_debug          : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0)
+        palavraControle_debug         : OUT STD_LOGIC_VECTOR(PALAVRA_CONTROLE_WIDTH - 1 DOWNTO 0);
+        opCode_debug                  : OUT STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0);
+        funct_debug                   : OUT STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
+        flagZero_debug                : OUT STD_LOGIC;
+        bancoReg_outA_debug           : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        bancoReg_outB_debug           : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        ULA_out_debug                 : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        PC_out_debug                  : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        selULA_debug                  : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0);
+        mux_ULA_MEM_LUI_JAL_out_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -71,11 +72,12 @@ BEGIN
             flagZero        => flagZero,
             funct           => funct,
             -- Saida para simulacao
-            bancoReg_outA_debug => bancoReg_outA_debug,
-            bancoReg_outB_debug => bancoReg_outB_debug,
-            ULA_out_debug       => ULA_out_debug,
-            PC_out_debug        => PC_out_debug,
-            selULA_debug        => selULA_debug
+            bancoReg_outA_debug           => bancoReg_outA_debug,
+            bancoReg_outB_debug           => bancoReg_outB_debug,
+            ULA_out_debug                 => ULA_out_debug,
+            PC_out_debug                  => PC_out_debug,
+            selULA_debug                  => selULA_debug,
+            mux_ULA_MEM_LUI_JAL_out_debug => mux_ULA_MEM_LUI_JAL_out_debug
         );
 
     UC : ENTITY work.unidadeControle
