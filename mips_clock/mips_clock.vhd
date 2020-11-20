@@ -14,7 +14,7 @@ ENTITY mips_clock IS
         OPCODE_WIDTH           : NATURAL := 6;
         REG_END_WIDTH          : NATURAL := 5;
         FUNCT_WIDTH            : NATURAL := 6;
-        PALAVRA_CONTROLE_WIDTH : NATURAL := 11;
+        PALAVRA_CONTROLE_WIDTH : NATURAL := 12;
         SHAMT_WIDTH            : NATURAL := 5;
         ULAOP_WIDTH            : NATURAL := 3;
         ADDR_WIDTH             : NATURAL := 32;

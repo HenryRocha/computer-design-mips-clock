@@ -46,6 +46,7 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 5);
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 6);
     ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 7);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 8);
 
     -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
     -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o
@@ -96,6 +97,7 @@ BEGIN
     habEscritaMEM       <= isSW;
     habLeituraMEM       <= isLW;
     selMuxJmp           <= isJ;
+    selSignalExtender   <= isORI;
 
     ulaOP <= "000" WHEN (isLW OR isSW) ELSE
         "001" WHEN (isBEQ) ELSE
