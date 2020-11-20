@@ -38,15 +38,15 @@ END ENTITY;
 ARCHITECTURE main OF unidadeControle IS
     -- Declarando onde cada ponto de controle sera localizado na palavra de controle.
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
-    ALIAS ulaOP               : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(ULAOP_WIDTH DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 1);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 2);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 3);
-    ALIAS branch              : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 4);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 5);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 6);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 7);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 8);
+    ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
+    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(4);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(5);
+    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(6);
+    ALIAS branch                 : STD_LOGIC IS palavraControle(7);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(8);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(9);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(10);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(11);
 
     -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
     -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o

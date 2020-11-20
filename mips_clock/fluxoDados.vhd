@@ -70,15 +70,15 @@ ARCHITECTURE main OF fluxoDados IS
 
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
-    ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(ULAOP_WIDTH DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 1);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 2);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 3);
-    ALIAS beq                 : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 4);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 5);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 6);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 7);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 8);
+    ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
+    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(4);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(5);
+    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(6);
+    ALIAS branch                 : STD_LOGIC IS palavraControle(7);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(8);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(9);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(10);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(11);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -122,7 +122,7 @@ BEGIN
         PORT MAP(
             entradaA_MUX => somaUm_out,
             entradaB_MUX => somaImedPc4_out,
-            seletor_MUX  => beq AND ULA_flagZero_out,
+            seletor_MUX  => branch AND ULA_flagZero_out,
             saida_MUX    => muxBeq_out
         );
 
