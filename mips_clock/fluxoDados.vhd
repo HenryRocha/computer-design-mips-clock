@@ -4,6 +4,7 @@
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
 ENTITY fluxoDados IS
     GENERIC (
@@ -73,12 +74,12 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
     ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(4);
     ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(5);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(6);
-    ALIAS branch                 : STD_LOGIC IS palavraControle(7);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(8);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(9);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(10);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(11);
+    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(7 DOWNTO 6);
+    ALIAS branch              : STD_LOGIC IS palavraControle(8);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(9);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(10);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(11);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(12);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -237,15 +238,17 @@ BEGIN
             we       => habEscritaMEM
         );
 
-    muxULAMem : ENTITY work.mux2x1
+    mux_ULA_MEM_LUI_JAL : ENTITY work.mux4x1
         GENERIC MAP(
-            larguraDados => DATA_WIDTH
+            DATA_WIDTH => DATA_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => ULA_out,
-            entradaB_MUX => RAM_out,
-            seletor_MUX  => selMuxULAMem,
-            saida_MUX    => muxULAMem_out
+            entradaA => ULA_out,
+            entradaB => RAM_out,
+            entradaC => imedTipoI & STD_LOGIC_VECTOR(to_unsigned(0, 16)),
+            entradaD => somaUm_out,
+            seletor  => selMuxUlaMemLuiJal,
+            saida    => muxULAMem_out
         );
 
     flipFlopFlagZero : ENTITY work.flipFlopGenerico

@@ -41,12 +41,12 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
     ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(4);
     ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(5);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(6);
-    ALIAS branch                 : STD_LOGIC IS palavraControle(7);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(8);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(9);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(10);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(11);
+    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(7 DOWNTO 6);
+    ALIAS branch              : STD_LOGIC IS palavraControle(8);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(9);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(10);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(11);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(12);
 
     -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
     -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o
@@ -62,6 +62,8 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS isANDI  : STD_LOGIC IS instrucao(6);
     ALIAS isORI   : STD_LOGIC IS instrucao(7);
     ALIAS isSLTI  : STD_LOGIC IS instrucao(8);
+    ALIAS isJAL   : STD_LOGIC IS instrucao(9);
+    ALIAS isLUI   : STD_LOGIC IS instrucao(10);
 
     -- Declarando todas as intrucoes da CPU e seus OpCodes.
     CONSTANT tipoR      : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
@@ -73,33 +75,42 @@ ARCHITECTURE main OF unidadeControle IS
     CONSTANT opcodeANDI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001100";
     CONSTANT opcodeORI  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001101";
     CONSTANT opcodeSLTI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001010";
+    CONSTANT opcodeJAL  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000011";
+    CONSTANT opcodeLUI  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001111";
 BEGIN
     -- Verificando qual a instrucao a ser executada.
     WITH opcode SELECT
-        instrucao <= "000000001" WHEN tipoR,
-        "000000010" WHEN opcodeLW,
-        "000000100" WHEN opcodeSW,
-        "000001000" WHEN opcodeBEQ,
-        "000010000" WHEN opcodeJ,
-        "000100000" WHEN opcodeADDI,
-        "001000000" WHEN opcodeANDI,
-        "010000000" WHEN opcodeORI,
-        "100000000" WHEN opcodeSLTI,
-        "000000000" WHEN OTHERS;
+        instrucao <=
+        "00000000001" WHEN tipoR,
+        "00000000010" WHEN opcodeLW,
+        "00000000100" WHEN opcodeSW,
+        "00000001000" WHEN opcodeBEQ,
+        "00000010000" WHEN opcodeJ,
+        "00000100000" WHEN opcodeADDI,
+        "00001000000" WHEN opcodeANDI,
+        "00010000000" WHEN opcodeORI,
+        "00100000000" WHEN opcodeSLTI,
+        "01000000000" WHEN opcodeJAL,
+        "10000000000" WHEN opcodeLUI,
+        "00000000000" WHEN OTHERS;
 
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
     habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI;
     selMuxRtRd          <= isTipoR;
     selMuxRtImed        <= isLW OR isSW OR isADDI OR isANDI OR isORI OR isSLTI;
-    selMuxULAMem        <= isLW;
-    branch              <= isBEQ;
-    habEscritaMEM       <= isSW;
-    habLeituraMEM       <= isLW;
-    selMuxJmp           <= isJ;
-    selSignalExtender   <= isORI;
+    selMuxUlaMemLuiJal  <=
+        "01" WHEN isLW ELSE
+        "10" WHEN isLUI ELSE
+        "11" WHEN isJAL ELSE
+        "00";
+    branch            <= isBEQ;
+    habEscritaMEM     <= isSW;
+    habLeituraMEM     <= isLW;
+    selMuxJmp         <= isJ;
+    selSignalExtender <= isORI;
 
-    ulaOP <= "000" WHEN (isLW OR isSW) ELSE
+    ula_op <= "000" WHEN (isLW OR isSW) ELSE
         "001" WHEN (isBEQ) ELSE
         "010" WHEN (isTipoR) ELSE
         "000" WHEN (isADDI) ELSE
