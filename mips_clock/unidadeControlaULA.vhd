@@ -1,3 +1,14 @@
+-- Autores:
+--      Henry Rocha
+--      Vitor Eller
+--      Bruno Domingues
+-- Informacoes:
+--      Nome do arquivo: 
+--          unidadeControleULA.vhd
+--      Descricao:
+--          UC da ULA. Responsavel por decodificar qual operacao a ULA deve realizar,
+--          baseado na saida da UC e no funct da instrucao.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
@@ -33,12 +44,12 @@ ARCHITECTURE rtl OF unidadeControleULA IS
     CONSTANT ula_sub : STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0) := "110";
     CONSTANT ula_slt : STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0) := "111";
 BEGIN
-    UC_ULA_OUT <= ula_add WHEN (ULA_OP = "00") ELSE
-        ula_sub WHEN (ULA_OP = "01") ELSE
-        ula_add WHEN (ULA_OP = "10" AND funct = funct_add) ELSE
-        ula_sub WHEN (ULA_OP = "10" AND funct = funct_sub) ELSE
-        ula_or WHEN (ULA_OP = "10" AND funct = funct_or) ELSE
-        ula_and WHEN (ULA_OP = "10" AND funct = funct_and) ELSE
-        ula_slt WHEN (ULA_OP = "10" AND funct = funct_slt) ELSE
+    -- Decide a operacao de acordo com as entradas.
+    UC_ULA_OUT <=
+        ula_add WHEN (ULA_OP = "010" AND funct = funct_add) OR (ULA_OP = "000") ELSE
+        ula_sub WHEN (ULA_OP = "010" AND funct = funct_sub) OR (ULA_OP = "001") ELSE
+        ula_or WHEN (ULA_OP = "010" AND funct = funct_or) OR (ULA_OP = "100") ELSE
+        ula_and WHEN (ULA_OP = "010" AND funct = funct_and) OR (ULA_OP = "011") ELSE
+        ula_slt WHEN (ULA_OP = "010" AND funct = funct_slt) OR (ULA_OP = "101")ELSE
         "000";
 END ARCHITECTURE;

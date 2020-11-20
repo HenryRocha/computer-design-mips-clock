@@ -1,3 +1,11 @@
+-- Autores:
+--      Paulo Santos
+-- Informacoes:
+--      Nome do arquivo: 
+--          registradorGenerico.vhd
+--      Descricao:
+--          Registrador generico. Design inicial veio dos Modelos VHDL.
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 

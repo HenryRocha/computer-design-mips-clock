@@ -4,6 +4,7 @@
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
+USE ieee.numeric_std.ALL;
 
 ENTITY fluxoDados IS
     GENERIC (
@@ -27,11 +28,12 @@ ENTITY fluxoDados IS
         funct    : OUT STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
         flagZero : OUT STD_LOGIC;
         -- Saidas para simulacao
-        bancoReg_outA_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        bancoReg_outB_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        ULA_out_debug       : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
-        PC_out_debug        : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
-        selULA_debug        : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0)
+        bancoReg_outA_debug           : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        bancoReg_outB_debug           : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        ULA_out_debug                 : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0);
+        PC_out_debug                  : OUT STD_LOGIC_VECTOR(ADDR_WIDTH - 1 DOWNTO 0);
+        selULA_debug                  : OUT STD_LOGIC_VECTOR(SELETOR_ULA_WIDTH - 1 DOWNTO 0);
+        mux_ULA_MEM_LUI_JAL_out_debug : OUT STD_LOGIC_VECTOR(DATA_WIDTH - 1 DOWNTO 0)
     );
 END ENTITY;
 
@@ -70,14 +72,16 @@ ARCHITECTURE main OF fluxoDados IS
 
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
-    ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(ULAOP_WIDTH DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 1);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 2);
-    ALIAS selMuxULAMem        : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 3);
-    ALIAS beq                 : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 4);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 5);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 6);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(ULAOP_WIDTH + 7);
+    ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
+    ALIAS selMuxRtRd31        : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(5 DOWNTO 4);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(6);
+    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(8 DOWNTO 7);
+    ALIAS branch              : STD_LOGIC IS palavraControle(9);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(10);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(11);
+    ALIAS selMuxJmp           : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(13 DOWNTO 12);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(14);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(15);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -114,26 +118,28 @@ BEGIN
             saida    => somaImedPc4_out
         );
 
-    muxBeq : ENTITY work.muxGenerico2x1
+    muxBeq : ENTITY work.mux2x1
         GENERIC MAP(
-            larguraDados => ADDR_WIDTH
+            DATA_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => somaUm_out,
-            entradaB_MUX => somaImedPc4_out,
-            seletor_MUX  => beq AND ULA_flagZero_out,
-            saida_MUX    => muxBeq_out
+            entradaA => somaUm_out,
+            entradaB => somaImedPc4_out,
+            seletor  => (branch AND ULA_flagZero_out) OR (selBNE AND (NOT ULA_flagZero_out)),
+            saida    => muxBeq_out
         );
 
-    muxJmp : ENTITY work.muxGenerico2x1
+    muxJmp : ENTITY work.mux4x1
         GENERIC MAP(
-            larguraDados => ADDR_WIDTH
+            DATA_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => muxBeq_out,
-            entradaB_MUX => PC_out(31 DOWNTO 28) & imedTipoJ & "00",
-            seletor_MUX  => selMuxJmp,
-            saida_MUX    => muxJmp_out
+            entradaA => muxBeq_out,
+            entradaB => PC_out(31 DOWNTO 28) & imedTipoJ & "00",
+            entradaC => bancoReg_outA,
+            entradaD => (OTHERS => '0'),
+            seletor  => selMuxJmp,
+            saida    => muxJmp_out
         );
 
     ROM : ENTITY work.ROMMIPS
@@ -148,25 +154,28 @@ BEGIN
             Dado     => instrucao
         );
 
-    estendeImedTipoI : ENTITY work.estendeSinalGenerico
+    estendeImedTipoI : ENTITY work.signalExtender
         GENERIC MAP(
             larguraDadoEntrada => 16,
             larguraDadoSaida   => DATA_WIDTH
         )
         PORT MAP(
             estendeSinal_IN  => imedTipoI,
+            seletor          => selSignalExtender,
             estendeSinal_OUT => imedTipoI_ext
         );
 
-    muxRtRd : ENTITY work.muxGenerico2x1
+    mux_RT_RD_31 : ENTITY work.mux4x1
         GENERIC MAP(
-            larguraDados => REG_END_WIDTH
+            DATA_WIDTH => REG_END_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => rt,
-            entradaB_MUX => rd,
-            seletor_MUX  => selMuxRtRd,
-            saida_MUX    => muxRtRd_out
+            entradaA => rt,
+            entradaB => rd,
+            entradaC => STD_LOGIC_VECTOR(to_unsigned(31, REG_END_WIDTH)),
+            entradaD => (OTHERS => '0'),
+            seletor  => selMuxRtRd31,
+            saida    => muxRtRd_out
         );
 
     bancoRegs : ENTITY work.bancoRegistradores
@@ -185,15 +194,15 @@ BEGIN
             saidaB       => bancoReg_outB
         );
 
-    muxRtMem : ENTITY work.muxGenerico2x1
+    muxRtMem : ENTITY work.mux2x1
         GENERIC MAP(
-            larguraDados => DATA_WIDTH
+            DATA_WIDTH => DATA_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => bancoReg_outB,
-            entradaB_MUX => imedTipoI_ext,
-            seletor_MUX  => selMuxRtImed,
-            saida_MUX    => muxRtMem_out
+            entradaA => bancoReg_outB,
+            entradaB => imedTipoI_ext,
+            seletor  => selMuxRtImed,
+            saida    => muxRtMem_out
         );
 
     UC_ULA : ENTITY work.unidadeControleULA
@@ -235,15 +244,17 @@ BEGIN
             we       => habEscritaMEM
         );
 
-    muxULAMem : ENTITY work.muxGenerico2x1
+    mux_ULA_MEM_LUI_JAL : ENTITY work.mux4x1
         GENERIC MAP(
-            larguraDados => DATA_WIDTH
+            DATA_WIDTH => DATA_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => ULA_out,
-            entradaB_MUX => RAM_out,
-            seletor_MUX  => selMuxULAMem,
-            saida_MUX    => muxULAMem_out
+            entradaA => ULA_out,
+            entradaB => RAM_out,
+            entradaC => imedTipoI & STD_LOGIC_VECTOR(to_unsigned(0, 16)),
+            entradaD => somaUm_out,
+            seletor  => selMuxUlaMemLuiJal,
+            saida    => muxULAMem_out
         );
 
     flipFlopFlagZero : ENTITY work.flipFlopGenerico
@@ -259,9 +270,10 @@ BEGIN
     funct  <= instFunct;
 
     -- Saidas de simulacao
-    bancoReg_outA_debug <= bancoReg_outA;
-    bancoReg_outB_debug <= bancoReg_outB;
-    ULA_out_debug       <= ULA_out;
-    PC_out_debug        <= PC_out;
-    selULA_debug        <= selULA;
+    bancoReg_outA_debug           <= bancoReg_outA;
+    bancoReg_outB_debug           <= bancoReg_outB;
+    ULA_out_debug                 <= ULA_out;
+    PC_out_debug                  <= PC_out;
+    selULA_debug                  <= selULA;
+    mux_ULA_MEM_LUI_JAL_out_debug <= muxULAMem_out;
 END ARCHITECTURE;

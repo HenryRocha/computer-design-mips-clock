@@ -1,3 +1,11 @@
+-- Autores:
+--      Paulo Santos
+-- Informacoes:
+--      Nome do arquivo: 
+--          somadorGenerico.vhd
+--      Descricao:
+--          Somador generico. Design inicial veio dos Modelos VHDL.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL; -- Biblioteca IEEE para funções aritméticas

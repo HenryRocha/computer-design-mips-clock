@@ -1,8 +1,19 @@
+-- Autores:
+--      Paulo Santos
+-- Modificado por:
+--      Henry Rocha
+--      Vitor Eller
+--      Bruno Domingues
+-- Informacoes:
+--      Nome do arquivo: 
+--          bancoRegistradores.vhd
+--      Descricao:
+--          Banco de registradores. Design inicial veio dos Modelos VHDL e foi
+--          alterado para inicializar os valores do registradores.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
-
--- Baseado no apendice C (Register Files) do COD (Patterson & Hennessy).
 
 ENTITY bancoRegistradores IS
     GENERIC (
