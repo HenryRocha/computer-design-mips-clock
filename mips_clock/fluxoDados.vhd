@@ -115,7 +115,7 @@ BEGIN
             saida    => somaImedPc4_out
         );
 
-    muxBeq : ENTITY work.muxGenerico2x1
+    muxBeq : ENTITY work.mux2x1
         GENERIC MAP(
             larguraDados => ADDR_WIDTH
         )
@@ -126,7 +126,7 @@ BEGIN
             saida_MUX    => muxBeq_out
         );
 
-    muxJmp : ENTITY work.muxGenerico2x1
+    muxJmp : ENTITY work.mux2x1
         GENERIC MAP(
             larguraDados => ADDR_WIDTH
         )
@@ -160,7 +160,7 @@ BEGIN
             estendeSinal_OUT => imedTipoI_ext
         );
 
-    muxRtRd : ENTITY work.muxGenerico2x1
+    muxRtRd : ENTITY work.mux2x1
         GENERIC MAP(
             larguraDados => REG_END_WIDTH
         )
@@ -187,7 +187,7 @@ BEGIN
             saidaB       => bancoReg_outB
         );
 
-    muxRtMem : ENTITY work.muxGenerico2x1
+    muxRtMem : ENTITY work.mux2x1
         GENERIC MAP(
             larguraDados => DATA_WIDTH
         )
@@ -237,7 +237,7 @@ BEGIN
             we       => habEscritaMEM
         );
 
-    muxULAMem : ENTITY work.muxGenerico2x1
+    muxULAMem : ENTITY work.mux2x1
         GENERIC MAP(
             larguraDados => DATA_WIDTH
         )

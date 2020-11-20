@@ -1,7 +1,7 @@
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 
-ENTITY muxGenerico2x1 IS
+ENTITY mux2x1 IS
     -- Total de bits das entradas e saidas
     GENERIC (
         larguraDados : NATURAL := 8
@@ -13,7 +13,7 @@ ENTITY muxGenerico2x1 IS
     );
 END ENTITY;
 
-ARCHITECTURE comportamento OF muxGenerico2x1 IS
+ARCHITECTURE comportamento OF mux2x1 IS
 BEGIN
     saida_MUX <= entradaB_MUX WHEN (seletor_MUX = '1') ELSE
         entradaA_MUX;
