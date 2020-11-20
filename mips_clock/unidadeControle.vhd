@@ -57,36 +57,52 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS isSW    : STD_LOGIC IS instrucao(2);
     ALIAS isBEQ   : STD_LOGIC IS instrucao(3);
     ALIAS isJ     : STD_LOGIC IS instrucao(4);
+    ALIAS isADDI  : STD_LOGIC IS instrucao(5);
+    ALIAS isANDI  : STD_LOGIC IS instrucao(6);
+    ALIAS isORI   : STD_LOGIC IS instrucao(7);
+    ALIAS isSLTI  : STD_LOGIC IS instrucao(8);
 
     -- Declarando todas as intrucoes da CPU e seus OpCodes.
-    CONSTANT tipoR     : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
-    CONSTANT opcodeLW  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
-    CONSTANT opcodeSW  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
-    CONSTANT opcodeBEQ : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
-    CONSTANT opcodeJ   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000010";
+    CONSTANT tipoR      : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
+    CONSTANT opcodeLW   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "100011";
+    CONSTANT opcodeSW   : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "101011";
+    CONSTANT opcodeBEQ  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000100";
+    CONSTANT opcodeJ    : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000010";
+    CONSTANT opcodeADDI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001000";
+    CONSTANT opcodeANDI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001100";
+    CONSTANT opcodeORI  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001101";
+    CONSTANT opcodeSLTI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001010";
 BEGIN
     -- Verificando qual a instrucao a ser executada.
     WITH opcode SELECT
-        instrucao <= "00001" WHEN tipoR,
-        "00010" WHEN opcodeLW,
-        "00100" WHEN opcodeSW,
-        "01000" WHEN opcodeBEQ,
-        "10000" WHEN opcodeJ,
-        "00000" WHEN OTHERS;
+        instrucao <= "000000001" WHEN tipoR,
+        "000000010" WHEN opcodeLW,
+        "000000100" WHEN opcodeSW,
+        "000001000" WHEN opcodeBEQ,
+        "000010000" WHEN opcodeJ,
+        "000100000" WHEN opcodeADDI,
+        "001000000" WHEN opcodeANDI,
+        "010000000" WHEN opcodeORI,
+        "100000000" WHEN opcodeSLTI,
+        "000000000" WHEN OTHERS;
 
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
-    habEscritaBancoRegs <= isTipoR;
+    habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI;
     selMuxRtRd          <= isTipoR;
-    selMuxRtImed        <= isLW OR isSW;
+    selMuxRtImed        <= isLW OR isSW OR isADDI OR isANDI OR isORI OR isSLTI;
     selMuxULAMem        <= isLW;
     branch              <= isBEQ;
     habEscritaMEM       <= isSW;
     habLeituraMEM       <= isLW;
     selMuxJmp           <= isJ;
 
-    ulaOP <= "00" WHEN (isLW OR isSW) ELSE
-        "01" WHEN (isBEQ) ELSE
-        "10" WHEN (isTipoR) ELSE
-        "00";
+    ulaOP <= "000" WHEN (isLW OR isSW) ELSE
+        "001" WHEN (isBEQ) ELSE
+        "010" WHEN (isTipoR) ELSE
+        "000" WHEN (isADDI) ELSE
+        "011" WHEN (isANDI) ELSE
+        "100" WHEN (isORI) ELSE
+        "101" WHEN (isSLTI) ELSE
+        "000";
 END ARCHITECTURE;
