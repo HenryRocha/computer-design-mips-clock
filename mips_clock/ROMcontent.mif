@@ -1,3 +1,4 @@
+
 -- Copyright (C) 2017  Intel Corporation. All rights reserved.
 -- Your use of Intel Corporation's design tools, logic functions
 -- and other software and tools, and its AMPP partner logic
@@ -28,14 +29,25 @@ CONTENT BEGIN
       -- $t5  (#13) := 0x16
 
     0    :   AC090008; --sw $t1 8($zero)     (m(8) := 0x0000000A)
-    1    :   8C080008; --lw $t0 8($zero)     ($t0  := 0x0000000A)
-    2    :   012A4022; --sub $t0 $t1 $t2     ($t0  := 0xFFFFFFFF)
-    3    :   012A4024; --and $t0 $t1 $t2     ($t0  := 0x0000000A)
-    4    :   012A4025; --or $t0 $t1 $t2      ($t0  := 0x0000000B)
-    5    :   012A402A; --slt $t0 $t1 $t2     ($t0  := 0x00000001)
-    6    :   010A4020; --add $t0 $t0 $t2     ($t0  := 0x0000000C)
-                       --segunda execução:   ($t0 := 0x00000017)
-    7    :   110BFFFE; --beq $t0 $t3 0xFFFE  (pc := #6)
-                       --segunda execução:   (pc := #8)
-    8    :   08000000; --j 0x000000          (pc := #0)
+    1    :   8C080008; --lw $t0 8($zero)     ($t0 := 0x0000000A)
+    2    :   012A4022; --sub $t0 $t1 $t2     ($t0 := 0xFFFFFFFF)
+    3    :   012A4024; --and $t0 $t1 $t2     ($t0 := 0x0000000A)
+    4    :   012A4025; --or $t0 $t1 $t2      ($t0 := 0x0000000B)
+    5    :   3C08FFFF; --lui $t0 0xFFFF      ($t0 := 0xFFFF0000)
+    6    :   2128000A; --addi $t0 $t1 0x000A ($t0 := 0x00000014)
+    7    :   31080013; --andi $t0 $t0 0x0013 ($t0 := 0x00000010)
+    8    :   35880007; --ori $t0 $t4 0x0007  ($t0 := 0x0000000F)
+    9    :   2928FFFF; --slti $t0 $t1 0xFFFF ($t0 := 0x00000000)
+    10   :   010A4020; --add $t0 $t0 $t2     ($t0 := 0x0000000B)
+                          --segunda execução ($t0 := 0x00000016)
+    11   :   150DFFFE; --bne $t0 $t5 0xFFFE  (pc := #10)
+                          --segunda execução (pc := #12)
+    12   :   012A402A; --slt $t0 $t1 $t2     ($t0 := 0x00000001)
+    13   :   010A4020; --add $t0 $t0 $t2     ($t0 := 0x0000000C)
+                          --segunda execução ($t0 := 0x00000017)
+    14   :   110BFFFE; --beq $t0 $t3 0xFFFE  (pc := #13)
+                          --segunda execução (pc := #15)
+    15   :   0C00001F; --jal 0x00001F        (pc := #31)
+    17   :   08000000; --j 0x000000          (pc := #0)
+    31   :   03E00008; --jr $ra              (pc := #17)
 END;
