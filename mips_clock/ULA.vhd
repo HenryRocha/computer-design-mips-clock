@@ -38,7 +38,7 @@ ARCHITECTURE comportamento OF ULA IS
     SIGNAL overflow     : STD_LOGIC;
 BEGIN
     -- Invertendo a entradaB, de acordo com o seletor(2).
-    muxinverteB : ENTITY work.muxGenerico2x1
+    muxinverteB : ENTITY work.mux2x1
         GENERIC MAP(
             larguraDados => larguraDados
         )
