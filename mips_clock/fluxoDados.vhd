@@ -81,6 +81,7 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(10);
     ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(11);
     ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(12);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(13);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -124,7 +125,7 @@ BEGIN
         PORT MAP(
             entradaA_MUX => somaUm_out,
             entradaB_MUX => somaImedPc4_out,
-            seletor_MUX  => branch AND ULA_flagZero_out,
+            seletor_MUX  => (branch AND ULA_flagZero_out) OR (selBNE AND (NOT ULA_flagZero_out)),
             saida_MUX    => muxBeq_out
         );
 

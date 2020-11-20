@@ -47,6 +47,7 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(10);
     ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(11);
     ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(12);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(13);
 
     -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
     -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o
@@ -64,6 +65,7 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS isSLTI  : STD_LOGIC IS instrucao(8);
     ALIAS isJAL   : STD_LOGIC IS instrucao(9);
     ALIAS isLUI   : STD_LOGIC IS instrucao(10);
+    ALIAS isBNE   : STD_LOGIC IS instrucao(11);
 
     -- Declarando todas as intrucoes da CPU e seus OpCodes.
     CONSTANT tipoR      : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000000";
@@ -77,22 +79,24 @@ ARCHITECTURE main OF unidadeControle IS
     CONSTANT opcodeSLTI : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001010";
     CONSTANT opcodeJAL  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000011";
     CONSTANT opcodeLUI  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001111";
+    CONSTANT opcodeBNE  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000101";
 BEGIN
     -- Verificando qual a instrucao a ser executada.
     WITH opcode SELECT
         instrucao <=
-        "00000000001" WHEN tipoR,
-        "00000000010" WHEN opcodeLW,
-        "00000000100" WHEN opcodeSW,
-        "00000001000" WHEN opcodeBEQ,
-        "00000010000" WHEN opcodeJ,
-        "00000100000" WHEN opcodeADDI,
-        "00001000000" WHEN opcodeANDI,
-        "00010000000" WHEN opcodeORI,
-        "00100000000" WHEN opcodeSLTI,
-        "01000000000" WHEN opcodeJAL,
-        "10000000000" WHEN opcodeLUI,
-        "00000000000" WHEN OTHERS;
+        "000000000001" WHEN tipoR,
+        "000000000010" WHEN opcodeLW,
+        "000000000100" WHEN opcodeSW,
+        "000000001000" WHEN opcodeBEQ,
+        "000000010000" WHEN opcodeJ,
+        "000000100000" WHEN opcodeADDI,
+        "000001000000" WHEN opcodeANDI,
+        "000010000000" WHEN opcodeORI,
+        "000100000000" WHEN opcodeSLTI,
+        "001000000000" WHEN opcodeJAL,
+        "010000000000" WHEN opcodeLUI,
+        "100000000000" WHEN opcodeBNE,
+        "000000000000" WHEN OTHERS;
 
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
@@ -105,13 +109,14 @@ BEGIN
         "11" WHEN isJAL ELSE
         "00";
     branch            <= isBEQ;
+    selBNE            <= isBNE;
     habEscritaMEM     <= isSW;
     habLeituraMEM     <= isLW;
     selMuxJmp         <= isJ;
     selSignalExtender <= isORI;
 
     ula_op <= "000" WHEN (isLW OR isSW) ELSE
-        "001" WHEN (isBEQ) ELSE
+        "001" WHEN (isBEQ OR isBNE) ELSE
         "010" WHEN (isTipoR) ELSE
         "000" WHEN (isADDI) ELSE
         "011" WHEN (isANDI) ELSE

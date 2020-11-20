@@ -10,11 +10,11 @@ ENTITY mips_clock IS
     GENERIC (
         DATA_WIDTH             : NATURAL := 32;
         INST_WIDTH             : NATURAL := 32;
-        NUM_INST               : NATURAL := 11;
+        NUM_INST               : NATURAL := 12;
         OPCODE_WIDTH           : NATURAL := 6;
         REG_END_WIDTH          : NATURAL := 5;
         FUNCT_WIDTH            : NATURAL := 6;
-        PALAVRA_CONTROLE_WIDTH : NATURAL := 13;
+        PALAVRA_CONTROLE_WIDTH : NATURAL := 14;
         SHAMT_WIDTH            : NATURAL := 5;
         ULAOP_WIDTH            : NATURAL := 3;
         ADDR_WIDTH             : NATURAL := 32;
