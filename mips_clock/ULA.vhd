@@ -1,14 +1,17 @@
--- Henry Rocha
--- Vitor Eller
--- Bruno Domingues
+-- Autores:
+--      Henry Rocha
+--      Vitor Eller
+--      Bruno Domingues
+-- Informacoes:
+--      Nome do arquivo: 
+--          ULA.vhd
+--      Descricao:
+--          A ULA eh responsavel por realizar as operacoes entre as entradas da instrucao passada.
+--          ULA feita bit a bit. Usando de adders e full adders.
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
-
--- A ULA eh responsavel por realizar as operacoes entre as entradas da instrucao passada
--- Ela sempre realiza a operacao entre dois registradores
--- Sua saida sempre sera enviada para o banco de registradores (esse mapeamento pode ser visto no Fluxo de Dados)
 
 ENTITY ULA IS
     GENERIC (
@@ -40,13 +43,13 @@ BEGIN
     -- Invertendo a entradaB, de acordo com o seletor(2).
     muxinverteB : ENTITY work.mux2x1
         GENERIC MAP(
-            larguraDados => larguraDados
+            DATA_WIDTH => larguraDados
         )
         PORT MAP(
-            entradaA_MUX => entradaB,
-            entradaB_MUX => NOT entradaB,
-            seletor_MUX  => seletor(2),
-            saida_MUX    => entradaB_inv
+            entradaA => entradaB,
+            entradaB => NOT entradaB,
+            seletor  => seletor(2),
+            saida    => entradaB_inv
         );
 
     -- Realizando todas as operacoes.
@@ -80,6 +83,7 @@ BEGIN
             saida    => saida
         );
 
+    -- Verificando se o resultado foi zero.
     flagZero <= '1' WHEN unsigned(saida) = 0 ELSE
         '0';
 END ARCHITECTURE;

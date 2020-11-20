@@ -1,3 +1,11 @@
+-- Autores:
+--      Paulo Santos
+-- Informacoes:
+--      Nome do arquivo: 
+--          ROMMIPS.vhd
+--      Descricao:
+--          ROM para o MIPS. Design inicial veio dos Modelos VHDL.
+
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;

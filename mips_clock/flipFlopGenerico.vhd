@@ -1,3 +1,16 @@
+-- Autores:
+--      Paulo Santos
+-- Modificado por:
+--      Henry Rocha
+--      Vitor Eller
+--      Bruno Domingues
+-- Informacoes:
+--      Nome do arquivo: 
+--          flipFlopGenerico.vhd
+--      Descricao:
+--          Flip Flop. Design inicial veio dos modelos VHDL da aula 2 e foi
+--          alterado para usar das flags ENABLE e RST.
+
 LIBRARY IEEE;
 USE IEEE.STD_LOGIC_1164.ALL;
 
@@ -11,13 +24,13 @@ ENTITY flipFlopGenerico IS
         -- Output ports
         DOUT : OUT STD_LOGIC
     );
-
 END ENTITY;
 
 ARCHITECTURE main OF flipFlopGenerico IS
 BEGIN
     PROCESS (RST, CLK)
     BEGIN
+        -- Reset o valor de DOUT caso a flag RST seja ativada.
         IF (RST = '1') THEN
             DOUT <= '0';
         ELSE

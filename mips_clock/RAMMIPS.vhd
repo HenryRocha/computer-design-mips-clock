@@ -1,3 +1,11 @@
+-- Autores:
+--      Paulo Santos
+-- Informacoes:
+--      Nome do arquivo: 
+--          RAMMIPS.vhd
+--      Descricao:
+--          RAM para o MIPS. Design inicial veio dos Modelos VHDL.
+
 LIBRARY IEEE;
 USE IEEE.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
@@ -6,7 +14,8 @@ ENTITY RAMMIPS IS
     GENERIC (
         dataWidth       : NATURAL := 32;
         addrWidth       : NATURAL := 32;
-        memoryAddrWidth : NATURAL := 6); -- 64 posicoes de 32 bits cada
+        memoryAddrWidth : NATURAL := 6 -- 64 posicoes de 32 bits cada
+    );
     PORT (
         clk      : IN STD_LOGIC;
         Endereco : IN STD_LOGIC_VECTOR (addrWidth - 1 DOWNTO 0);

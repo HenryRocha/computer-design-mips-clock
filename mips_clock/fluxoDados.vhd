@@ -120,13 +120,13 @@ BEGIN
 
     muxBeq : ENTITY work.mux2x1
         GENERIC MAP(
-            larguraDados => ADDR_WIDTH
+            DATA_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => somaUm_out,
-            entradaB_MUX => somaImedPc4_out,
-            seletor_MUX  => (branch AND ULA_flagZero_out) OR (selBNE AND (NOT ULA_flagZero_out)),
-            saida_MUX    => muxBeq_out
+            entradaA => somaUm_out,
+            entradaB => somaImedPc4_out,
+            seletor  => (branch AND ULA_flagZero_out) OR (selBNE AND (NOT ULA_flagZero_out)),
+            saida    => muxBeq_out
         );
 
     muxJmp : ENTITY work.mux4x1
@@ -196,13 +196,13 @@ BEGIN
 
     muxRtMem : ENTITY work.mux2x1
         GENERIC MAP(
-            larguraDados => DATA_WIDTH
+            DATA_WIDTH => DATA_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => bancoReg_outB,
-            entradaB_MUX => imedTipoI_ext,
-            seletor_MUX  => selMuxRtImed,
-            saida_MUX    => muxRtMem_out
+            entradaA => bancoReg_outB,
+            entradaB => imedTipoI_ext,
+            seletor  => selMuxRtImed,
+            saida    => muxRtMem_out
         );
 
     UC_ULA : ENTITY work.unidadeControleULA

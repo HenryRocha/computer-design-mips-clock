@@ -1,14 +1,17 @@
--- Henry Rocha
--- Vitor Eller
--- Bruno Domingues
+-- Autores:
+--      Henry Rocha
+--      Vitor Eller
+--      Bruno Domingues
+-- Informacoes:
+--      Nome do arquivo: 
+--          unidadeControle.vhd
+--      Descricao:
+--          UC. Responsavel por decodificar o opcode e funct de cada instrucao.
+--          Decide quais pontos de controle devem ser acionados.
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
 USE ieee.numeric_std.ALL;
-
--- A unidade de controle eh responsavel por gerar os pontos de controle com base na instrucao sendo utilizada
--- A instrucao eh interpretada baseada no OpCode passado
--- Com isso, geramos um vetor de 8 bits, onde cada um representa um ponto de controle
 
 ENTITY unidadeControle IS
     GENERIC (

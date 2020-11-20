@@ -1,6 +1,14 @@
+-- Autores:
+--      Paulo Santos
+-- Informacoes:
+--      Nome do arquivo: 
+--          somaConstante.vhd
+--      Descricao:
+--          Soma constante. Design inicial veio dos Modelos VHDL.
+
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
-USE ieee.numeric_std.ALL; --Soma (esta biblioteca =ieee)
+USE ieee.numeric_std.ALL;
 
 ENTITY somaConstante IS
     GENERIC (

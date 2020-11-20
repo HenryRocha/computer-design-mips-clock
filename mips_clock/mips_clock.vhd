@@ -1,7 +1,13 @@
--- Henry Rocha
--- Vitor Eller
--- Bruno Domingues
--- Top Level do projeto. Mapeia a CPU e as entradas e saídas da placa.
+-- Autores:
+--      Henry Rocha
+--      Vitor Eller
+--      Bruno Domingues
+-- Informacoes:
+--      Nome do arquivo: 
+--          mips_clock.vhd
+--      Descricao:
+--          Top Level do projeto. Mapeia as conexoes entre a UC e o FD, alem das
+--          conexoes com a placa.
 
 LIBRARY ieee;
 USE ieee.std_logic_1164.ALL;
