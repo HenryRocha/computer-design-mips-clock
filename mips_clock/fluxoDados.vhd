@@ -73,15 +73,15 @@ ARCHITECTURE main OF fluxoDados IS
     -- Partes da palavra de controle
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
     ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(4);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(5);
-    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(7 DOWNTO 6);
-    ALIAS branch              : STD_LOGIC IS palavraControle(8);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(9);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(10);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(11);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(12);
-    ALIAS selBNE              : STD_LOGIC IS palavraControle(13);
+    ALIAS selMuxRtRd31        : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(5 DOWNTO 4);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(6);
+    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(8 DOWNTO 7);
+    ALIAS branch              : STD_LOGIC IS palavraControle(9);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(10);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(11);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(12);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(13);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(14);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -163,15 +163,17 @@ BEGIN
             estendeSinal_OUT => imedTipoI_ext
         );
 
-    muxRtRd : ENTITY work.mux2x1
+    mux_RT_RD_31 : ENTITY work.mux4x1
         GENERIC MAP(
-            larguraDados => REG_END_WIDTH
+            DATA_WIDTH => REG_END_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => rt,
-            entradaB_MUX => rd,
-            seletor_MUX  => selMuxRtRd,
-            saida_MUX    => muxRtRd_out
+            entradaA => rt,
+            entradaB => rd,
+            entradaC => STD_LOGIC_VECTOR(to_unsigned(31, REG_END_WIDTH)),
+            entradaD => (OTHERS => '0'),
+            seletor  => selMuxRtRd31,
+            saida    => muxRtRd_out
         );
 
     bancoRegs : ENTITY work.bancoRegistradores

@@ -39,15 +39,15 @@ ARCHITECTURE main OF unidadeControle IS
     -- Declarando onde cada ponto de controle sera localizado na palavra de controle.
     ALIAS habEscritaBancoRegs : STD_LOGIC IS palavraControle(0);
     ALIAS ula_op              : STD_LOGIC_VECTOR(ULAOP_WIDTH - 1 DOWNTO 0) IS palavraControle(3 DOWNTO 1);
-    ALIAS selMuxRtRd          : STD_LOGIC IS palavraControle(4);
-    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(5);
-    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(7 DOWNTO 6);
-    ALIAS branch              : STD_LOGIC IS palavraControle(8);
-    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(9);
-    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(10);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(11);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(12);
-    ALIAS selBNE              : STD_LOGIC IS palavraControle(13);
+    ALIAS selMuxRtRd31        : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(5 DOWNTO 4);
+    ALIAS selMuxRtImed        : STD_LOGIC IS palavraControle(6);
+    ALIAS selMuxUlaMemLuiJal  : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(8 DOWNTO 7);
+    ALIAS branch              : STD_LOGIC IS palavraControle(9);
+    ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(10);
+    ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(11);
+    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(12);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(13);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(14);
 
     -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
     -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o
@@ -101,9 +101,12 @@ BEGIN
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
     habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI;
-    selMuxRtRd          <= isTipoR;
-    selMuxRtImed        <= isLW OR isSW OR isADDI OR isANDI OR isORI OR isSLTI;
-    selMuxUlaMemLuiJal  <=
+    selMuxRtRd31        <=
+        "01" WHEN isTipoR ELSE
+        "10" WHEN isJAL ELSE
+        "00";
+    selMuxRtImed       <= isLW OR isSW OR isADDI OR isANDI OR isORI OR isSLTI;
+    selMuxUlaMemLuiJal <=
         "01" WHEN isLW ELSE
         "10" WHEN isLUI ELSE
         "11" WHEN isJAL ELSE
