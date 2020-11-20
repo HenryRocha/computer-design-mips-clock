@@ -79,9 +79,9 @@ ARCHITECTURE main OF fluxoDados IS
     ALIAS branch              : STD_LOGIC IS palavraControle(9);
     ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(10);
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(11);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(12);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(13);
-    ALIAS selBNE              : STD_LOGIC IS palavraControle(14);
+    ALIAS selMuxJmp           : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(13 DOWNTO 12);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(14);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(15);
 
     -- Constantes
     CONSTANT INCREMENTO : NATURAL := 4;
@@ -129,15 +129,17 @@ BEGIN
             saida_MUX    => muxBeq_out
         );
 
-    muxJmp : ENTITY work.mux2x1
+    muxJmp : ENTITY work.mux4x1
         GENERIC MAP(
-            larguraDados => ADDR_WIDTH
+            DATA_WIDTH => ADDR_WIDTH
         )
         PORT MAP(
-            entradaA_MUX => muxBeq_out,
-            entradaB_MUX => PC_out(31 DOWNTO 28) & imedTipoJ & "00",
-            seletor_MUX  => selMuxJmp,
-            saida_MUX    => muxJmp_out
+            entradaA => muxBeq_out,
+            entradaB => PC_out(31 DOWNTO 28) & imedTipoJ & "00",
+            entradaC => bancoReg_outA,
+            entradaD => (OTHERS => '0'),
+            seletor  => selMuxJmp,
+            saida    => muxJmp_out
         );
 
     ROM : ENTITY work.ROMMIPS

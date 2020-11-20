@@ -45,9 +45,9 @@ ARCHITECTURE main OF unidadeControle IS
     ALIAS branch              : STD_LOGIC IS palavraControle(9);
     ALIAS habEscritaMEM       : STD_LOGIC IS palavraControle(10);
     ALIAS habLeituraMEM       : STD_LOGIC IS palavraControle(11);
-    ALIAS selMuxJmp           : STD_LOGIC IS palavraControle(12);
-    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(13);
-    ALIAS selBNE              : STD_LOGIC IS palavraControle(14);
+    ALIAS selMuxJmp           : STD_LOGIC_VECTOR(1 DOWNTO 0) IS palavraControle(13 DOWNTO 12);
+    ALIAS selSignalExtender   : STD_LOGIC IS palavraControle(14);
+    ALIAS selBNE              : STD_LOGIC IS palavraControle(15);
 
     -- O sinal "instrucao" eh responsavel por dizer qual instrucao esta sendo executada.
     -- Desse modo, ele eh um vetor onde o tamanho eh o numero de instrucoes que o
@@ -80,6 +80,10 @@ ARCHITECTURE main OF unidadeControle IS
     CONSTANT opcodeJAL  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000011";
     CONSTANT opcodeLUI  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "001111";
     CONSTANT opcodeBNE  : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0) := "000101";
+
+    -- Declarando o funct do JR, usado para diferenciar ele
+    -- das outras instrucoes tipo R.
+    CONSTANT functJR : STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0) := "001000";
 BEGIN
     -- Verificando qual a instrucao a ser executada.
     WITH opcode SELECT
@@ -100,10 +104,11 @@ BEGIN
 
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
-    habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI;
+    habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI OR isJAL;
     selMuxRtRd31        <=
         "01" WHEN isTipoR ELSE
         "10" WHEN isJAL ELSE
+        "10" WHEN (isTipoR = '1' AND funct = functJR) ELSE
         "00";
     selMuxRtImed       <= isLW OR isSW OR isADDI OR isANDI OR isORI OR isSLTI;
     selMuxUlaMemLuiJal <=
@@ -111,11 +116,14 @@ BEGIN
         "10" WHEN isLUI ELSE
         "11" WHEN isJAL ELSE
         "00";
-    branch            <= isBEQ;
-    selBNE            <= isBNE;
-    habEscritaMEM     <= isSW;
-    habLeituraMEM     <= isLW;
-    selMuxJmp         <= isJ;
+    branch        <= isBEQ;
+    selBNE        <= isBNE;
+    habEscritaMEM <= isSW;
+    habLeituraMEM <= isLW;
+    selMuxJmp     <=
+        "01" WHEN (isJ OR isJAL) ELSE
+        "10" WHEN (isTipoR = '1' AND funct = functJR) ELSE
+        "00";
     selSignalExtender <= isORI;
 
     ula_op <= "000" WHEN (isLW OR isSW) ELSE
