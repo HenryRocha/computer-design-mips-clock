@@ -53,11 +53,18 @@ END ENTITY;
 
 ARCHITECTURE main OF mips_clock IS
     -- Sinais intermediarios
+    SIGNAL clk             : STD_LOGIC;
     SIGNAL palavraControle : STD_LOGIC_VECTOR(PALAVRA_CONTROLE_WIDTH - 1 DOWNTO 0);
     SIGNAL opCode          : STD_LOGIC_VECTOR(OPCODE_WIDTH - 1 DOWNTO 0);
     SIGNAL funct           : STD_LOGIC_VECTOR(FUNCT_WIDTH - 1 DOWNTO 0);
     SIGNAL flagZero        : STD_LOGIC;
 BEGIN
+    detectorSub0 : ENTITY work.edgeDetector(bordaSubida) PORT MAP (
+        clk     => CLOCK_50,
+        entrada => (NOT FPGA_RESET_N),
+        saida   => clk
+        );
+
     fluxoDados : ENTITY work.fluxoDados
         GENERIC MAP(
             DATA_WIDTH             => DATA_WIDTH,
@@ -72,7 +79,7 @@ BEGIN
             SELETOR_ULA_WIDTH      => SELETOR_ULA_WIDTH
         )
         PORT MAP(
-            clk             => CLOCK_50,
+            clk             => clk,
             palavraControle => palavraControle,
             opCode          => opCode,
             flagZero        => flagZero,
@@ -100,17 +107,12 @@ BEGIN
             ADDR_WIDTH             => ADDR_WIDTH
         )
         PORT MAP(
-            clk             => CLOCK_50,
+            clk             => clk,
             opCode          => opCode,
             funct           => funct,
             flagZero        => flagZero,
             palavraControle => palavraControle
         );
-
-    -- Saidas de teste
-    LEDR(0) <= SW(0);
-    LEDR(1) <= NOT KEY(0);
-    LEDR(2) <= NOT FPGA_RESET_N;
 
     -- Saidas para simulacao
     palavraControle_debug <= palavraControle;
