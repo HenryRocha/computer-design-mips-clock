@@ -107,7 +107,7 @@ BEGIN
 
     -- Logica de quais pontos de controle devem ser habilitados de acordo com o tipo de
     -- instrucao e o opcode.
-    habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI OR isJAL;
+    habEscritaBancoRegs <= isTipoR OR isADDI OR isANDI OR isORI OR isSLTI OR isJAL OR isLUI;
     selMuxRtRd31        <=
         "01" WHEN isTipoR ELSE
         "10" WHEN isJAL ELSE
