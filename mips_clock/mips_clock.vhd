@@ -29,12 +29,10 @@ ENTITY mips_clock IS
     PORT (
         -- Input ports
         CLOCK_50     : IN STD_LOGIC;
-        SW           : IN STD_LOGIC_VECTOR(9 DOWNTO 0);
-        KEY          : IN STD_LOGIC_VECTOR(3 DOWNTO 0);
+        SW           : IN STD_LOGIC_VECTOR(1 DOWNTO 0);
         FPGA_RESET_N : IN STD_LOGIC;
 
         -- Output ports
-        LEDR                               : OUT STD_LOGIC_VECTOR(9 DOWNTO 0);
         HEX0, HEX1, HEX2, HEX3, HEX4, HEX5 : OUT STD_LOGIC_VECTOR(6 DOWNTO 0)
     );
 END ENTITY;
