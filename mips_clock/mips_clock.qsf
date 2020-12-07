@@ -178,6 +178,13 @@ set_location_assignment PIN_V13 -to SW[1]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[0]
 set_instance_assignment -name IO_STANDARD "3.3-V LVTTL" -to SW[1]
 
+#============================================================
+# Fix Warning 18236
+# Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+# Source: https://electronics.stackexchange.com/questions/301250/altera-quartus-warning-18236-number-of-processors-has-not-been-specified
+#============================================================
+set_global_assignment -name NUM_PARALLEL_PROCESSORS ALL
+
 set_global_assignment -name POWER_PRESET_COOLING_SOLUTION "23 MM HEAT SINK WITH 200 LFPM AIRFLOW"
 set_global_assignment -name POWER_BOARD_THERMAL_MODEL "NONE (CONSERVATIVE)"
 set_global_assignment -name VHDL_INPUT_VERSION VHDL_2008
