@@ -1,0 +1,55 @@
+-- Copyright (C) 2017  Intel Corporation. All rights reserved.
+-- Your use of Intel Corporation's design tools, logic functions
+-- and other software and tools, and its AMPP partner logic
+-- functions, and any output files from any of the foregoing
+-- (including device programming or simulation files), and any
+-- associated documentation or information are expressly subject
+-- to the terms and conditions of the Intel Program License
+-- Subscription Agreement, the Intel Quartus Prime License Agreement,
+-- the Intel FPGA IP License Agreement, or other applicable license
+-- agreement, including, without limitation, that your use is for
+-- the sole purpose of programming logic devices manufactured by
+-- Intel and sold by Intel or its authorized distributors.  Please
+-- refer to the applicable agreement for further details.
+
+WIDTH=32;
+DEPTH=64;
+ADDRESS_RADIX=DEC;
+DATA_RADIX=HEX;
+
+CONTENT BEGIN
+      -- Valores iniciais no banco de registradores:
+      -- $zero (#0) := 0x00
+      -- $t0   (#8) := 0x00
+      -- $t1   (#9) := 0x0A
+      -- $t2  (#10) := 0x0B
+      -- $t3  (#11) := 0x0C
+      -- $t4  (#12) := 0x0D
+      -- $t5  (#13) := 0x16
+
+--                                                                  PC      Saida ULA
+    0    :   3C080000; --lui $t0 0x0000      ($t0  := 0x00000000)   0x00    0x00000000
+    1    :   35080008; --ori $t0 $t0 0x0008  ($t0  := 0x00000008)   0x04    0x00000008
+    2    :   AD0A0000; --sw $t2 0($t0)       (m(8) := 0x0000000B)   0x08    0x00000008
+    3    :   8D040000; --lw $a0 0($t0)       ($a0  := 0x0000000B)   0x0C    0x00000008
+    4    :   00802020; --add $a0 $a0 $0      ($a0  := 0x0000000B)   0x10    0x0000000B
+    5    :   3C09AA55; --lui  $t1 0xAA55     ($t1  := 0xAA550000)   0x14    0xXXXXXXXX
+    6    :   31CE0001; --andi $t6 $t6 0x1    ($t6  := 0x0000000X)   0x18    0x0000000X
+    7    :   35CE0001; --ori  $t6 $t6 0x1    ($t6  := 0x00000001)   0x1C    0x00000001
+    8    :   012E7822; --sub  $t7 $t1 $t6    ($t7  := 0xAA54FFFF)   0x20    0xAA54FFFF
+    9    :   3C09AA54; --lui  $t1 0xAA54     ($t1  := 0xAA540000)   0x24    0xXXXXXXXX
+    10   :   3529FFFF; --ori  $t1 $t1 0xFFFF ($t1  := 0xAA54FFFF)   0x28    0xAA54FFFF
+    11   :   012F7822; --sub  $t7 $t1 $t7    ($t7  := 0x00000000)   0x2C    0x00000000
+    12   :   11E00003; --beq  $t7 $0  0x0003 ($t7  := 0x00000000)   0x30    0x00000000  se o LUI funcionar, vai para o 0x40
+    13   :   08000000; --j 0x000000          (pc := #0)             0x34    0xXXXXXXXX  caso contrario, vai para 0x00
+    14   :   00000000; --nop                 ($t7  := 0x00000000)   0x38    0xXXXXXXXX
+    15   :   00000000; --nop                 ($t7  := 0x00000000)   0x3C    0xXXXXXXXX
+    16   :   00000000; --nop                 ($t7  := 0x00000000)   0x40    0xXXXXXXXX
+    17   :   00000000; --nop                 ($t7  := 0x00000000)   0x44    0xXXXXXXXX
+    18   :   00000000; --nop                 ($t7  := 0x00000000)   0x48    0xXXXXXXXX
+    19   :   00000000; --nop                 ($t7  := 0x00000000)   0x4C    0xXXXXXXXX
+    20   :   00000000; --nop                 ($t7  := 0x00000000)   0x50    0xXXXXXXXX
+    21   :   08000000; --j 0x000000          (pc := #0)             0x54    0xXXXXXXXX
+   [22..62] :   00000000; --nop
+    63   :   08000000; --j 0x000000          (pc := #0)             0xFC    0xXXXXXXXX
+END;
